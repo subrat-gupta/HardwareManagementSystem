@@ -7,6 +7,7 @@ import { PageSideNavComponent } from './components/page-side-nav/page-side-nav.c
 import { RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from '../auth/login/login.component';
 
 
 

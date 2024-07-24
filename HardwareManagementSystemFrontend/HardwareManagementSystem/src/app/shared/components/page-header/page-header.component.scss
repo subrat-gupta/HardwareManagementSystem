@@ -1,14 +1,40 @@
 mat-toolbar {
-    .spacer {
-      flex: 1 1 auto;
-    }
-  
-    .user-info {
-      display: flex;
-      align-items: center;
-  
-      button {
-        margin-left: 1.5rem;
-      }
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+
+    button {
+      margin-left: 1.5rem;
     }
   }
+}
+.header-toolbar {
+//  background-color: #ffffff; /* White background */
+background-color: transparent;
+  color: #000000; /* Black text */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); /* Subtle shadow */
+}
+
+.heading {
+  font-family: 'Pacifico', cursive; 
+  font-size: 2.5rem;
+  color: white; 
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.header-button {
+  background-color: #3897f0;
+  color: #3897f0;
+  margin-left: 10px;
+}
+
+.header-button:hover {
+  background-color: rgba(56, 151, 240, 0.1);
+}
