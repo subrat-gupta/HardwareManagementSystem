@@ -24,8 +24,11 @@ public class Users {
     private String location;
     private Boolean isActive;
 
-    @ManyToOne
-    @JoinColumn(name = "userTypeId")
+
+    @Column(name = "userTypeId")
+    private Long userTypeId;
+
+    @Transient
     private UserType userType;
     
     // Getters and Setters

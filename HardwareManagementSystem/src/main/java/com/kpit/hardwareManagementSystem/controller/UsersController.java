@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.kpit.hardwareManagementSystem.Service.UsersService;
+import com.kpit.hardwareManagementSystem.dto.UsersDTO;
 import com.kpit.hardwareManagementSystem.model.Users;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class UsersController {
     public List<Users> getAllUsers() {
         return usersService.getAllUsers();
     }
+    
 
     @GetMapping("/{kpid}")
     public Users getUserById(@PathVariable Long kpid) {
@@ -25,8 +27,8 @@ public class UsersController {
     }
 
     @PostMapping
-    public Users createUser(@RequestBody Users user) {
-        return usersService.createUser(user);
+    public Users createUser(@RequestBody UsersDTO userDTO) {
+        return usersService.createUser(userDTO);
     }
 
     @DeleteMapping("/{kpid}")

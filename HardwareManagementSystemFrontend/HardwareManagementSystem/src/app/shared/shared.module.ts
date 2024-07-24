@@ -7,6 +7,7 @@ import { PageSideNavComponent } from './components/page-side-nav/page-side-nav.c
 import { RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -14,7 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [PageHeaderComponent, PageFooterComponent, PageSideNavComponent, PageNotFoundComponent],
-  imports: [CommonModule,MaterialModule,RouterModule,ReactiveFormsModule],
+  imports: [CommonModule,MaterialModule,RouterModule,ReactiveFormsModule,HttpClientModule],
   exports:[CommonModule,MaterialModule,PageHeaderComponent,PageFooterComponent,PageSideNavComponent,RouterModule,PageNotFoundComponent,ReactiveFormsModule]
 })
 export class SharedModule { }
