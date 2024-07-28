@@ -1,4 +1,4 @@
-package com.kpit.hardwareManagementSystem.Service;
+package com.kpit.hardwareManagementSystem.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,57 +1,56 @@
-@import "../../../theme.scss";
-
-:host {
+.form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; // Space between form fields
+ 
+}
+.container {
   display: flex;
   justify-content: space-between;
-  height: 100%;
-  width: 90%;
+  align-items: center;
+  min-height: 100vh;
+  padding: 0 50px;
+  background: url('/assets/your-background-image.jpg') no-repeat center center fixed; 
+  background-size: cover;
 }
 
-.register-form {
-  width: 600px;
-
-  mat-card {
-    mat-card-header {
-      display: flex;
-      justify-content: center;
-
-      mat-card-title {
-        font-size: 2rem;
-        color: $dark-accent-A200;
-      }
-    }
-    mat-grid-tile {
-      mat-form-field {
-        width: 100%;
-      }
-    }
-
-    mat-card-actions {
-      button {
-        margin: auto;
-        width: 80%;
-      }
-      h4 {
-        margin: 0;
-        padding-right: 1rem;
-      }
-    }
-  }
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
 }
 
-.library-info {
-  width: 400px;
-  padding: 1rem;
-  border-left: 1px solid white;
+.error-message {
+  color: red;
+  margin-top: 16px;
+  text-align: center;
+}
+.form-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-  mat-list-item {
-    height: auto;
+.image-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    p {
-      font-size: 1.2rem;
-      font-style: italic;
-      text-align: justify;
-      white-space: normal;
-    }
-  }
+.image-section img {
+  max-width: 100%;
+  height: auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

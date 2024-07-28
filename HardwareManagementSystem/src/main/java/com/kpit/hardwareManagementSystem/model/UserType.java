@@ -17,6 +17,10 @@ public class UserType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
-    
+
+    public UserType(String description) {
+        this.description = description;
+    }
+
     // Getters and Setters
 }
