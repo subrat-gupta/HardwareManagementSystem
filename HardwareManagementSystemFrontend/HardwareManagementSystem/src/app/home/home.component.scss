@@ -23,14 +23,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  //background-color: rgba(255, 255, 255, 0.8); /* Optional: To make the text more readable */
+  margin-right: auto;
 }
 
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 128px); /* Adjust height for header and footer */
+  height: calc(100vh - 128px);
+  margin-right: 20px;
 }
 
 .image-section {

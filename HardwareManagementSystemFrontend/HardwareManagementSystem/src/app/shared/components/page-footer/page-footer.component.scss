@@ -1,9 +1,13 @@
 mat-toolbar {
+  background-color: transparent;
+  color: #ffffff; /* Black text */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); /* Subtle shadow */
     .spacer {
       flex: 1 1 auto;
     }
     .copyright {
       display: flex;
       align-items: center;
+      color: white;
     }
   }
