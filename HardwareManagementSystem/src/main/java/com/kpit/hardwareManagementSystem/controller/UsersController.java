@@ -20,12 +20,11 @@ public class UsersController {
     public ResponseEntity<Users> registerUser(@RequestBody UsersDTO usersDTO) {
         Users user = new Users();
         user.setEmail(usersDTO.getEmail());
-        user.setPassword(usersDTO.getPassword()); // Password encoding will be handled in the service
+        user.setPassword(usersDTO.getPassword());
         user.setName(usersDTO.getName());
         user.setContactNumber(usersDTO.getContactNumber());
         user.setLocation(usersDTO.getLocation());
         user.setKpitEmpId(usersDTO.getKpitEmpId());
-        // The service method will set isActive to false and userTypeId to EMPLOYEE
         Users savedUser = usersService.registerUser(user);
         return ResponseEntity.ok(savedUser);
     }
@@ -52,5 +51,38 @@ public class UsersController {
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         usersService.deleteUser(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/editUser")
+    public ResponseEntity<Users> editUser(@RequestBody UsersDTO usersDTO) {
+        Users user = usersService.getUserById(usersDTO.getId());
+        if (user != null) {
+            user.setEmail(usersDTO.getEmail());
+            user.setPassword(usersDTO.getPassword());
+            user.setName(usersDTO.getName());
+            user.setContactNumber(usersDTO.getContactNumber());
+            user.setLocation(usersDTO.getLocation());
+            user.setKpitEmpId(usersDTO.getKpitEmpId());
+            user.setUserTypeId(usersDTO.getUserTypeId());
+            user.setIsActive(usersDTO.getIsActive());
+            Users updatedUser = usersService.updateUser(user);
+            return ResponseEntity.ok(updatedUser);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @PostMapping("/addUser")
+    public ResponseEntity<Users> addUser(@RequestBody UsersDTO usersDTO) {
+        Users user = new Users();
+        user.setEmail(usersDTO.getEmail());
+        user.setPassword(usersDTO.getPassword()); // Password encoding will be handled in the service
+        user.setName(usersDTO.getName());
+        user.setContactNumber(usersDTO.getContactNumber());
+        user.setLocation(usersDTO.getLocation());
+        user.setKpitEmpId(usersDTO.getKpitEmpId());
+        user.setIsActive(usersDTO.getIsActive());
+        user.setUserTypeId(usersDTO.getUserTypeId());
+        Users savedUser = usersService.addUser(user);
+        return ResponseEntity.ok(savedUser);
     }
 }

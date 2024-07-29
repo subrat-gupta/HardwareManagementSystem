@@ -3,27 +3,36 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ManagementComponent } from './hardware/management/management.component';
-import { HomeComponent } from './home/home.component';
-import { UserDashboardComponent } from './dashboard/user-dashboard/user-dashboard.component';
-import { AdminDashboardComponent } from './dashboard/admin-dashboard/admin-dashboard.component';
+
 import { AuthGuard } from './shared/guards/auth.guard';
 import { AdminGuard } from './shared/guards/admin.guard';
-import { UserManagementComponent } from './dashboard/admin-dashboard/user-management/user-management.component';
-import { IssueRequestComponent } from './dashboard/admin-dashboard/issue-request/issue-request.component';
-import { RequestComponent } from './dashboard/admin-dashboard/request/request.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { RequestComponent as AdminRequestComponent } from './admin/request/request.component';
+import { HomeComponent } from './home/home.component';
+import { UsersManagementComponent } from './admin/users-management/users-management.component';
+import { IssueReturnComponent } from './admin/issue-return/issue-return.component';
+import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.component';
+import { DashboardComponent } from './user/dashboard/dashboard.component';
+import { ProfileComponent } from './user/profile/profile.component';
+import { RequestComponent } from './user/request/request.component';
 
 export const routes: Routes = [
-    {path: '', redirectTo: 'home', pathMatch: 'full' },
-    {path:"home",component:HomeComponent},
-    {path:"login",component:HomeComponent},
-    {path:"register",component:RegisterComponent},
-    {path:"hardware/management",component:ManagementComponent},
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: 'home', component: HomeComponent },
+    { path: 'login', component: HomeComponent },
+    { path: 'register', component: RegisterComponent },
+    { path: 'hardware/management', component: ManagementComponent },
     { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard, AdminGuard], children: [
         { path: 'hardware/management', component: ManagementComponent },
-        { path: 'users', component: UserManagementComponent },
-        { path: 'issue-return', component: IssueRequestComponent },
-        { path: 'request', component:RequestComponent  },
+        { path: 'users', component: UsersManagementComponent },
+        { path: 'issue-return', component: IssueReturnComponent },
+        { path: 'request', component: AdminRequestComponent },
     ] },
-    { path: 'user-dashboard', component: UserDashboardComponent, canActivate: [AuthGuard] },
-    {path :"**",component:PageNotFoundComponent},
+    { path: 'user-dashboard', component: UserDashboardComponent, canActivate: [AuthGuard], children: [
+        { path: 'dashboard', component: DashboardComponent },
+        { path: 'profile', component: ProfileComponent },
+        { path: 'request', component: RequestComponent },
+        { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    ] },
+    { path: '**', component: PageNotFoundComponent },
 ];

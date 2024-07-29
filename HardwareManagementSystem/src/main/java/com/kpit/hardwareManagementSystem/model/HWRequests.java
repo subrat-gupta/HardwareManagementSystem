@@ -1,5 +1,7 @@
 package com.kpit.hardwareManagementSystem.model;
 
+
+
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
@@ -18,7 +20,8 @@ public class HWRequests {
     private LocalDateTime requestDate;
     private Boolean isComplete;
     private String comments;
-
+    private LocalDateTime expectedReturnDate; 
+    private String status;
     @ManyToOne
     @JoinColumn(name = "userId")
     private Users user;
