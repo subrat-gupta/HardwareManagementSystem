@@ -1,5 +1,7 @@
 package com.kpit.hardwareManagementSystem.dto;
 
+import com.kpit.hardwareManagementSystem.model.UserType;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +16,7 @@ public class UsersDTO {
     private String contactNumber;
     private String location;
     private Boolean isActive;
-    private Long userTypeId;
+    private UserType userType;
 
     // Getters and Setters
 }

@@ -24,7 +24,7 @@ public class UsersService {
 
     public Users registerUser(Users user) {
         UserType employeeType = userTypeRepository.findByDescription("EMPLOYEE");
-        user.setUserTypeId(employeeType.getId());
+        user.setUserType(employeeType);
         user.setIsActive(false);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return usersRepository.save(user);
@@ -37,8 +37,8 @@ public class UsersService {
     public List<Users> getAllUsers() {
         List<Users> users = usersRepository.findAll();
         for (Users user : users) {
-            if (user.getUserTypeId() != null) {
-                UserType userType = userTypeRepository.findById(user.getUserTypeId()).orElse(null);
+            if (user.getUserType() != null) {
+                UserType userType = userTypeRepository.findById(user.getUserType().getId()).orElse(null);
                 user.setUserType(userType);
             }
         }

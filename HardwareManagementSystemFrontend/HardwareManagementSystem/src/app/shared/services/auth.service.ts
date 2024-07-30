@@ -21,6 +21,7 @@ export class AuthService {
         if (response.jwt) {
           localStorage.setItem('token', response.jwt);
           localStorage.setItem('currentUser', JSON.stringify(response.user)); // Save user details
+          console.log(response.user);
         }
         return response;
       })

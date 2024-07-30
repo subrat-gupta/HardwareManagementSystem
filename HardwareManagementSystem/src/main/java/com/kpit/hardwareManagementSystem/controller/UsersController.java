@@ -63,7 +63,7 @@ public class UsersController {
             user.setContactNumber(usersDTO.getContactNumber());
             user.setLocation(usersDTO.getLocation());
             user.setKpitEmpId(usersDTO.getKpitEmpId());
-            user.setUserTypeId(usersDTO.getUserTypeId());
+            user.setUserType(usersDTO.getUserType());
             user.setIsActive(usersDTO.getIsActive());
             Users updatedUser = usersService.updateUser(user);
             return ResponseEntity.ok(updatedUser);
@@ -81,7 +81,7 @@ public class UsersController {
         user.setLocation(usersDTO.getLocation());
         user.setKpitEmpId(usersDTO.getKpitEmpId());
         user.setIsActive(usersDTO.getIsActive());
-        user.setUserTypeId(usersDTO.getUserTypeId());
+        user.setUserType(usersDTO.getUserType());
         Users savedUser = usersService.addUser(user);
         return ResponseEntity.ok(savedUser);
     }

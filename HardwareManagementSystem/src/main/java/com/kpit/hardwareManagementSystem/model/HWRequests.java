@@ -1,7 +1,5 @@
 package com.kpit.hardwareManagementSystem.model;
 
-
-
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;

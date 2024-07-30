@@ -30,7 +30,7 @@ export class LoginComponent {
       next: (response) => {
         if (response.jwt) {
           const user = this.authService.getCurrentUser();
-          if (user.userTypeId === 1) {
+          if (user.userType.id === 1) {
             this.router.navigate(['/admin-dashboard']);
           } else {
             this.router.navigate(['/user-dashboard']);
