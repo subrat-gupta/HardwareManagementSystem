@@ -3,8 +3,8 @@ package com.kpit.hardwareManagementSystem.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.kpit.hardwareManagementSystem.Service.HWIssueRegisterService;
 import com.kpit.hardwareManagementSystem.model.HWIssueRegister;
+import com.kpit.hardwareManagementSystem.service.HWIssueRegisterService;
 
 import java.util.List;
 

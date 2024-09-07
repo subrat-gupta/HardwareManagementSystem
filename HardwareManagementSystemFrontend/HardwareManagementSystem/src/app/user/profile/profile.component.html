@@ -1,0 +1,36 @@
+<mat-card *ngIf="user">
+    <mat-card-header>
+      <mat-card-title>{{ user.name }}</mat-card-title>
+      <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>User Type: {{ user.userType.description }}</p>
+      <button mat-raised-button color="primary" (click)="toggleEdit()">Edit Profile</button>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+    </mat-card-actions>
+  </mat-card>
+  
+  <div *ngIf="isEditing">
+    <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" required>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" required type="email">
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>User Type</mat-label>
+        <input matInput formControlName="userType" required>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit">Save Changes</button>
+      <button mat-raised-button color="accent" (click)="toggleEdit()">Cancel</button>
+    </form>
+  </div>
+  

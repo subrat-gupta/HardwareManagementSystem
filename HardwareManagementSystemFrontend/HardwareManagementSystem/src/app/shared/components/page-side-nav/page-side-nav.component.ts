@@ -16,7 +16,7 @@ export class PageSideNavComponent {
     this.navItems=[
       { value: 'Home', link: 'home' },
       { value: 'Request', link: 'Request' },
-      { value: 'Issue/Return', link: 'Issue-Return' },
+      { value: 'Issue-Return', link: 'Issue-Return' },
       { value: 'Search', link: 'Search' },
       { value: 'HW Management', link: 'hardware/management' },
       { value: 'User Management', link: 'User-Management' },

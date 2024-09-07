@@ -1,0 +1,80 @@
+<div class="request-container">
+  <div class="form-container">
+    <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Hardware Type</mat-label>
+        <mat-select formControlName="hwTypeId" (selectionChange)="onTypeChange($event.value)">
+          <mat-option *ngFor="let type of hwTypes" [value]="type.id">
+            {{ type.description }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Hardware</mat-label>
+        <mat-select formControlName="hwDetailsId">
+          <mat-option *ngFor="let hw of filteredHwDetailsList" [value]="hw.id">
+            {{ hw.name }} ({{ hw.kpitSerialNo }})
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Comments</mat-label>
+        <textarea matInput formControlName="comments"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Expected Return Date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="expectedReturnDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="!requestForm.valid">Submit Request</button>
+    </form>
+  </div>
+
+  <div class="hw-details-container">
+    <mat-card>
+      <mat-card-title>Available Hardware</mat-card-title>
+      <mat-card-content>
+        <mat-form-field appearance="fill">
+          <mat-label>Hardware Type</mat-label>
+          <mat-select (selectionChange)="onTypeChange($event.value)">
+            <mat-option *ngFor="let type of hwTypes" [value]="type.id">
+              {{ type.description }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <table mat-table [dataSource]="filteredHwDetailsList" class="mat-elevation-z8">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="hwType">
+            <th mat-header-cell *matHeaderCellDef> Type </th>
+            <td mat-cell *matCellDef="let element"> {{element.hwType.description}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="isIssued">
+            <th mat-header-cell *matHeaderCellDef> Is Issued </th>
+            <td mat-cell *matCellDef="let element"> {{element.isIssued ? 'Yes' : 'No'}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="check">
+            <th mat-header-cell *matHeaderCellDef> Select </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-checkbox></mat-checkbox>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['name', 'hwType', 'isIssued', 'check']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['name', 'hwType', 'isIssued', 'check'];"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

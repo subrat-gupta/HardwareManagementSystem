@@ -3,8 +3,8 @@ package com.kpit.hardwareManagementSystem.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.kpit.hardwareManagementSystem.Service.HWTypeService;
 import com.kpit.hardwareManagementSystem.model.HWType;
+import com.kpit.hardwareManagementSystem.service.HWTypeService;
 
 import java.util.List;
 

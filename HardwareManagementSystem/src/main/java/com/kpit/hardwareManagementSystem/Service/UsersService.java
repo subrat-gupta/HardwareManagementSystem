@@ -1,31 +1,72 @@
-package com.kpit.hardwareManagementSystem.Service;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+package com.kpit.hardwareManagementSystem.service;
 
 import com.kpit.hardwareManagementSystem.model.Users;
+import com.kpit.hardwareManagementSystem.model.UserType;
 import com.kpit.hardwareManagementSystem.repository.UsersRepository;
+import com.kpit.hardwareManagementSystem.repository.UserTypeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class UsersService {
+
     @Autowired
     private UsersRepository usersRepository;
 
-    public List<Users> getAllUsers() {
-        return usersRepository.findAll();
-    }
+    @Autowired
+    private UserTypeRepository userTypeRepository;
 
-    public Users getUserById(Long kpid) {
-        return usersRepository.findById(kpid).orElse(null);
-    }
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    public Users createUser(Users user) {
+    public Users registerUser(Users user) {
+        UserType employeeType = userTypeRepository.findByDescription("EMPLOYEE");
+        user.setUserType(employeeType);
+        user.setIsActive(false);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return usersRepository.save(user);
     }
 
-    public void deleteUser(Long kpid) {
-        usersRepository.deleteById(kpid);
+    public Users getUserByEmail(String email) {
+        return usersRepository.findByEmail(email);
+    }
+
+    public List<Users> getAllUsers() {
+        List<Users> users = usersRepository.findAll();
+        for (Users user : users) {
+            if (user.getUserType() != null) {
+                UserType userType = userTypeRepository.findById(user.getUserType().getId()).orElse(null);
+                user.setUserType(userType);
+            }
+        }
+        return users;
+    }
+    
+    public Users addUser(Users user) {
+        
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return usersRepository.save(user);
+    }
+    public Users getUserById(Long id) {
+        return usersRepository.findById(id).orElse(null);
+    }
+
+    public void deleteUser(Long id) {
+        usersRepository.deleteById(id);
+    }
+
+    public Users updateUser(Users user) {
+        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        } else {
+            Users existingUser = usersRepository.findById(user.getId()).orElse(null);
+            if (existingUser != null) {
+                user.setPassword(existingUser.getPassword());
+            }
+        }
+        return usersRepository.save(user);
     }
 }

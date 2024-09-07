@@ -1,11 +1,11 @@
 <mat-toolbar color="primary">
-    <span>Hardware Management Sytem</span>
+    <span>Hardware Management System</span>
     <span class="spacer"></span>
-    <div class="user-info">
-      
-        <div class="name">Hi, Rajnish</div>
-       
-        <button mat-raised-button color="accent" routerLink="/profile">Profile</button>
-        <button mat-raised-button color="warn" >Log Out</button>
+    <div class="user-info" *ngIf="user">
+      <div class="name">Hi, {{ user.name }}</div>
+      <button mat-raised-button color="accent" routerLink="/profile">Profile</button>
+      <button mat-raised-button color="warn" (click)="logout()">Log Out</button>
     </div>
-</mat-toolbar>
+  </mat-toolbar>
+  
+  

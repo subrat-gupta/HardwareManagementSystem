@@ -1,0 +1,54 @@
+.admin-dashboard-container {
+    display: flex;
+    height: calc(100vh - 64px); // Adjust based on your header and footer height
+  }
+  
+  .sidenav-container {
+    width: 100%;
+  }
+  
+  .mat-sidenav {
+    width: 250px;
+    background: #1e1e2d; // Dark background for sidenav
+    color: white;
+  }
+  
+  .mat-nav-list .mat-list-item {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    transition: background 0.3s ease;
+  }
+  
+  .mat-nav-list .mat-list-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .mat-nav-list .mat-list-item .mat-icon {
+    margin-right: 15px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    color: #8bc34a; // Lime green for icons
+  }
+  
+  .mat-nav-list .mat-list-item .nav-text {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  
+  .active-link {
+    background: rgba(255, 255, 255, 0.2);
+    font-weight: bold;
+  }
+  
+  .mat-toolbar {
+    background: #4a148c; // Purple for toolbar
+    color: white;
+  }
+  
+  .button {
+    background: #8bc34a; // Lime green for buttons
+    color: black;
+  }
+  
