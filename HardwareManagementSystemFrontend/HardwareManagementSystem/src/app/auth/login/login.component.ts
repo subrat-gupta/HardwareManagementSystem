@@ -30,6 +30,8 @@ export class LoginComponent {
       next: (response) => {
         if (response.jwt) {
           const user = this.authService.getCurrentUser();
+         
+          console.log('User Type:', user.userType);
           if (user.userType.id === 1) {
             this.router.navigate(['/admin-dashboard']);
           } else {

@@ -1,1 +1,60 @@
-<p>hardware-management works!</p>
+<div class="hardware-management-container">
+    <h2 class="section-title">Hardware Management</h2>
+  
+    <!-- Button to add new hardware -->
+    <button mat-raised-button color="primary" (click)="openAddEditForm()">Add Hardware</button>
+  
+    <!-- Table displaying hardware details -->
+    <table mat-table [dataSource]="hwDetails" class="mat-elevation-z8">
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let hw"> {{ hw.name }} </td>
+      </ng-container>
+  
+      <!-- Description Column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let hw"> {{ hw.description }} </td>
+      </ng-container>
+  
+      <!-- Part Number Column -->
+      <ng-container matColumnDef="partNumber">
+        <th mat-header-cell *matHeaderCellDef> Part Number </th>
+        <td mat-cell *matCellDef="let hw"> {{ hw.partNumber }} </td>
+      </ng-container>
+  
+      <!-- Product Serial Number Column -->
+      <ng-container matColumnDef="productSerialNumber">
+        <th mat-header-cell *matHeaderCellDef> Serial Number </th>
+        <td mat-cell *matCellDef="let hw"> {{ hw.productSerialNumber }} </td>
+      </ng-container>
+  
+      <!-- Hardware Type Column -->
+      <ng-container matColumnDef="hwType">
+        <th mat-header-cell *matHeaderCellDef> Type </th>
+        <td mat-cell *matCellDef="let hw"> {{ hw.hwType?.description }} </td>
+      </ng-container>
+  
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let hw">
+          <button mat-button color="accent" (click)="editHardware(hw)">Edit</button>
+          <button mat-button color="warn" (click)="deleteHardware(hw.id)">Delete</button>
+        </td>
+      </ng-container>
+  
+      <!-- Header and Row Definition -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+    </table>
+  
+    <!-- No Data Message -->
+    <div *ngIf="hwDetails.length === 0" class="no-data">
+      No hardware details available.
+    </div>
+  </div>
+  

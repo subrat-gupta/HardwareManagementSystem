@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatNativeDateModule } from '@angular/material/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';  // Added FormsModule and ReactiveFormsModule
 
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatBadgeModule } from "@angular/material/badge";
@@ -8,7 +9,7 @@ import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
 import { MatButtonModule } from "@angular/material/button";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { MatCardModule } from "@angular/material/card";
-import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatCheckboxModule } from "@angular/material/checkbox";  // Ensure this is included
 import { MatChipsModule } from "@angular/material/chips";
 import { MatCommonModule } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
@@ -41,15 +42,17 @@ import { MatTreeModule } from "@angular/material/tree";
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],  // Added FormsModule and ReactiveFormsModule
   exports: [
+    FormsModule,  // Exported for use in other components
+    ReactiveFormsModule,  // Exported for use in other components
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
     MatButtonModule,
     MatButtonToggleModule,
     MatCardModule,
-    MatCheckboxModule,
+    MatCheckboxModule,  // Ensure MatCheckboxModule is included here
     MatChipsModule,
     MatCommonModule,
     MatDatepickerModule,

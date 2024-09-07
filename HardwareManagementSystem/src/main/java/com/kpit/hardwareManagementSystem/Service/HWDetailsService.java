@@ -13,6 +13,11 @@ public class HWDetailsService {
     @Autowired
     private HWDetailsRepository hwDetailsRepository;
 
+    // Fetch all hardware, including the associated types
+    public List<HWDetails> getAllHWDetailsWithType() {
+        return hwDetailsRepository.findAll(); // Ensure fetch type is set to EAGER if needed
+    }
+
     public List<HWDetails> getAllHWDetails() {
         return hwDetailsRepository.findAll();
     }

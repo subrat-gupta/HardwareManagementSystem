@@ -1,1 +1,79 @@
-<p>issue-return works!</p>
+<div class="issue-return-container">
+    <h1>Issue/Return</h1>
+    <mat-tab-group>
+      <mat-tab label="By User">
+        <div class="tab-content">
+          <mat-form-field>
+            <mat-label>Search by User ID</mat-label>
+            <input matInput (keyup)="searchUser($event)" placeholder="Enter User ID">
+          </mat-form-field>
+          <div *ngIf="user">
+            <div class="user-details">
+              <div class="user-info">
+                <h2>User Details</h2>
+                <p>ID: {{user.id}}</p>
+                <p>Name: {{user.name}}</p>
+                <p>Email: {{user.email}}</p>
+              </div>
+              <button mat-button class="issue-button" (click)="issueHardware()">Issue Hardware</button>
+            </div>
+  
+            <h3>Issued Hardware</h3>
+            <table mat-table [dataSource]="issuedHardware" class="mat-elevation-z8">
+              <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                  <mat-checkbox (change)="$event ? masterToggle() : null"
+                                [checked]="isAllSelected()"
+                                [indeterminate]="isAnySelected()">
+                  </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? toggleSelection(element) : null"
+                                [checked]="selection.isSelected(element)">
+                  </mat-checkbox>
+                </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let element">
+                  <button mat-button class="return-button" (click)="returnHardware(element)">Return</button>
+                </td>
+              </ng-container>
+  
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <button mat-button class="return-button" (click)="returnSelectedHardware()">Return Selected</button>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="By Hardware">
+        <div class="tab-content">
+          <mat-form-field>
+            <mat-label>Search by Hardware ID</mat-label>
+            <input matInput (keyup)="searchHardware($event)" placeholder="Enter Hardware ID">
+          </mat-form-field>
+          <div *ngIf="hardware">
+            <h2>Hardware Details</h2>
+            <p>ID: {{hardware.id}}</p>
+            <p>Name: {{hardware.name}}</p>
+            <h3>Issued to</h3>
+            <p *ngIf="hardware.user">User: {{hardware.user.name}} ({{hardware.user.email}})</p>
+            <p *ngIf="!hardware.user">This hardware is not issued to any user.</p>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
