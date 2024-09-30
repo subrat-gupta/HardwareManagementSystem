@@ -1,4 +1,4 @@
-package com.kpit.hardwareManagementSystem.Service;
+package com.kpit.hardwareManagementSystem.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,4 +28,8 @@ public class HWIssueRegisterService {
     public void deleteHWIssueRegister(Long id) {
         hwIssueRegisterRepository.deleteById(id);
     }
+    public List<HWIssueRegister> getIssuedHardwareByUser(Long userId) {
+        return hwIssueRegisterRepository.findIssuedHardwareByUser(userId);
+    }
+    
 }

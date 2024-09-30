@@ -3,12 +3,13 @@ package com.kpit.hardwareManagementSystem.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.kpit.hardwareManagementSystem.Service.HWIssueRegisterService;
 import com.kpit.hardwareManagementSystem.model.HWIssueRegister;
+import com.kpit.hardwareManagementSystem.service.HWIssueRegisterService;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/hw-issue-register")
 public class HWIssueRegisterController {
     @Autowired
@@ -33,4 +34,10 @@ public class HWIssueRegisterController {
     public void deleteHWIssueRegister(@PathVariable Long id) {
         hwIssueRegisterService.deleteHWIssueRegister(id);
     }
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/issued/{userId}")
+    public List<HWIssueRegister> getIssuedHardwareByUser(@PathVariable Long userId) {
+        return hwIssueRegisterService.getIssuedHardwareByUser(userId);
+    }
+
 }

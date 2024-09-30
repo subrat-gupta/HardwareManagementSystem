@@ -7,4 +7,5 @@ import com.kpit.hardwareManagementSystem.model.UserType;
 
 @Repository
 public interface UserTypeRepository extends JpaRepository<UserType, Long> {
+	UserType findByDescription(String description);
 }

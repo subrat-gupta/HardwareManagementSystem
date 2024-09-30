@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Select Hardware to Issue</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Hardware</mat-label>
+    <mat-select [(value)]="selectedHardware">
+      <mat-option *ngFor="let item of availableHardware" [value]="item">
+        {{ item.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button (click)="onIssue()" [disabled]="!selectedHardware">Issue</button>
+</mat-dialog-actions>

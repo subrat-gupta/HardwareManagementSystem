@@ -1,36 +1,53 @@
 package com.kpit.hardwareManagementSystem.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import com.kpit.hardwareManagementSystem.Service.HWTypeService;
 import com.kpit.hardwareManagementSystem.model.HWType;
+import com.kpit.hardwareManagementSystem.service.HWTypeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/hw-types")
 public class HWTypeController {
+
     @Autowired
     private HWTypeService hwTypeService;
 
+    // Get all HW Types
     @GetMapping
-    public List<HWType> getAllHWTypes() {
-        return hwTypeService.getAllHWTypes();
+    public ResponseEntity<List<HWType>> getAllHWTypes() {
+        List<HWType> hwTypes = hwTypeService.getAllHWTypes();
+        return ResponseEntity.ok(hwTypes);
     }
 
+    // Get specific HW Type by ID
     @GetMapping("/{id}")
-    public HWType getHWTypeById(@PathVariable Long id) {
-        return hwTypeService.getHWTypeById(id);
+    public ResponseEntity<HWType> getHWTypeById(@PathVariable Long id) {
+        HWType hwType = hwTypeService.getHWTypeById(id);
+        return hwType != null ? ResponseEntity.ok(hwType) : ResponseEntity.notFound().build();
     }
 
+    // Create new HW Type
     @PostMapping
-    public HWType createHWType(@RequestBody HWType hwType) {
-        return hwTypeService.createHWType(hwType);
+    public ResponseEntity<HWType> createHWType(@RequestBody HWType hwType) {
+        HWType savedHWType = hwTypeService.saveHWType(hwType);
+        return ResponseEntity.ok(savedHWType);
     }
 
+    // Update existing HW Type
+    @PutMapping("/{id}")
+    public ResponseEntity<HWType> updateHWType(@PathVariable Long id, @RequestBody HWType hwType) {
+        hwType.setId(id); // Ensure ID is set
+        HWType updatedHWType = hwTypeService.saveHWType(hwType);
+        return ResponseEntity.ok(updatedHWType);
+    }
+
+    // Delete HW Type by ID
     @DeleteMapping("/{id}")
-    public void deleteHWType(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteHWType(@PathVariable Long id) {
         hwTypeService.deleteHWType(id);
+        return ResponseEntity.ok().build();
     }
 }

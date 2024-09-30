@@ -1,0 +1,76 @@
+.admin-requests-container {
+  padding: 20px;
+
+  .section-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .search-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    .search-box {
+      flex: 1;
+      margin-right: 20px;
+    }
+
+    button {
+      margin-left: 10px;
+    }
+  }
+
+  .filter-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+
+    .date-picker {
+      margin-right: 20px;
+      min-width: 200px;
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+  }
+
+  table {
+    width: 100%;
+    margin-top: 20px;
+    
+    th {
+      background-color: #2e2e2e;
+      color: white;
+    }
+
+    td, th {
+      padding: 12px;
+      text-align: left;
+    }
+  }
+
+  .no-requests {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    color: gray;
+  }
+
+  .approved-status {
+    color: green;
+  }
+
+  .rejected-status {
+    color: red;
+  }
+
+  .pending-status {
+    color: orange;
+  }
+}

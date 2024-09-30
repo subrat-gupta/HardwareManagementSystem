@@ -1,33 +1,47 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { Router } from '@angular/router';
+import { AuthService } from '../../shared/services/auth.service';
+
 @Component({
-  selector: 'register',
+  selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-  hidePwdContent: boolean = true;
   registerForm: FormGroup;
+  hidePassword: boolean = true;
+  error: string | null = null;
 
-  constructor(private fb: FormBuilder) {
-    this.registerForm = fb.group({
-      firstName: fb.control('', [Validators.required]),
-      lastName: fb.control('', [Validators.required]),
-      email: fb.control('', [Validators.required]),
-      mobileNumber: fb.control('', [Validators.required]),
-      password: fb.control('', [Validators.required]),
-      rpassword: fb.control('', [Validators.required]),
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+    this.registerForm = this.fb.group({
+      name: this.fb.control('', [Validators.required]),
+      kpitEmpId: this.fb.control('', [Validators.required]),
+      email: this.fb.control('', [Validators.required, Validators.email]),
+      contactNumber: this.fb.control('', [Validators.required]),
+      location: this.fb.control('', [Validators.required]),
+      password: this.fb.control('', [Validators.required])
     });
   }
 
   register() {
-    let user = {
-      firstName: this.registerForm.get('firstName')?.value,
-      lastName: this.registerForm.get('lastName')?.value,
+    let userInfo = {
+      name: this.registerForm.get('name')?.value,
+      kpitEmpId: this.registerForm.get('kpitEmpId')?.value,
       email: this.registerForm.get('email')?.value,
-      mobileNumber: this.registerForm.get('mobileNumber')?.value,
+      contactNumber: this.registerForm.get('contactNumber')?.value,
+      location: this.registerForm.get('location')?.value,
       password: this.registerForm.get('password')?.value,
     };
-   
+
+    this.authService.register(userInfo).subscribe({
+      next: (response) => {
+        this.router.navigate(['/login']);
+      },
+      error: (error) => {
+        this.error = 'Registration failed. Please try again.';
+      }
+    });
   }
 }

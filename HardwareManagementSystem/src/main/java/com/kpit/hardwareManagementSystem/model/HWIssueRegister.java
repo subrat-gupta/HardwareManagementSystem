@@ -26,8 +26,8 @@ public class HWIssueRegister {
     private HWRequests hwRequests;
 
     @ManyToOne
-    @JoinColumn(name = "masterHwListId")
-    private HWDetailsMaster hwDetailsMaster;
+    @JoinColumn(name = "HwId")
+    private HWDetails hwDetailsMaster;
     
     // Getters and Setters
 }

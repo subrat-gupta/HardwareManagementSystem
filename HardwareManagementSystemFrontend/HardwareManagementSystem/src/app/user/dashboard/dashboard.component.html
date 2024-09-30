@@ -1,0 +1,51 @@
+<div class="dashboard-container">
+    <mat-card class="dashboard-card">
+      <mat-card-title>User Requests</mat-card-title>
+      <mat-card-content>
+        <table mat-table [dataSource]="requests" class="mat-elevation-z8">
+          <!-- Hardware Name Column -->
+          <ng-container matColumnDef="hwName">
+            <th mat-header-cell *matHeaderCellDef> Hardware Name </th>
+            <td mat-cell *matCellDef="let request"> {{ request.hwDetails.name }} </td>
+          </ng-container>
+  
+          <!-- Status Column -->
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let request">
+              <mat-icon *ngIf="request.status === 'APPROVED'" color="primary">check_circle</mat-icon>
+              <mat-icon *ngIf="request.status === 'REJECTED'" color="warn">cancel</mat-icon>
+              <mat-icon *ngIf="request.status === 'PENDING'" color="accent">hourglass_empty</mat-icon>
+              {{ request.status }}
+            </td>
+          </ng-container>
+  
+          <!-- Completed Column with Icons -->
+          <ng-container matColumnDef="isComplete">
+            <th mat-header-cell *matHeaderCellDef> Completed </th>
+            <td mat-cell *matCellDef="let request">
+              <mat-icon *ngIf="request.isComplete" class="complete-icon">check_circle</mat-icon>
+              <mat-icon *ngIf="!request.isComplete" class="incomplete-icon">highlight_off</mat-icon>
+            </td>
+          </ng-container>
+  
+          <!-- Expected Return Date Column -->
+          <ng-container matColumnDef="expectedReturnDate">
+            <th mat-header-cell *matHeaderCellDef> Expected Return Date </th>
+            <td mat-cell *matCellDef="let request"> {{ request.expectedReturnDate | date }} </td>
+          </ng-container>
+  
+          <!-- Request Date Column -->
+          <ng-container matColumnDef="requestDate">
+            <th mat-header-cell *matHeaderCellDef> Request Date </th>
+            <td mat-cell *matCellDef="let request"> {{ request.requestDate | date }} </td>
+          </ng-container>
+  
+          <!-- Header and Row Definitions -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

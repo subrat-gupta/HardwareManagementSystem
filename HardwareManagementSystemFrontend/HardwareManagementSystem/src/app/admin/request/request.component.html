@@ -1,0 +1,98 @@
+<div class="admin-requests-container">
+  <h2 class="section-title">User Requests</h2>
+
+  <!-- Search bar -->
+  <div class="search-container">
+    <mat-form-field class="search-box">
+      <mat-label>Search by User Name or ID</mat-label>
+      <input matInput [(ngModel)]="searchTerm" (input)="applyFilter()" placeholder="Search">
+    </mat-form-field>
+    
+    <!-- Clear filters button -->
+    <button mat-raised-button color="warn" (click)="clearFilters()">Clear Filters</button>
+  </div>
+
+  <!-- Date Range Filters and Status Checkboxes -->
+  <div class="filter-container">
+    <mat-form-field class="date-picker">
+      <mat-label>Start Date</mat-label>
+      <input matInput [matDatepicker]="startPicker" [(ngModel)]="startDate" (dateChange)="applyFilter()">
+      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="date-picker">
+      <mat-label>End Date</mat-label>
+      <input matInput [matDatepicker]="endPicker" [(ngModel)]="endDate" (dateChange)="applyFilter()">
+      <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Checkboxes for filtering by status -->
+    <div class="checkbox-container">
+      <mat-checkbox [(ngModel)]="showApproved" (change)="applyFilter()">Show Approved</mat-checkbox>
+      <mat-checkbox [(ngModel)]="showPending" (change)="applyFilter()">Show Pending</mat-checkbox>
+      <mat-checkbox [(ngModel)]="showRejected" (change)="applyFilter()">Show Rejected</mat-checkbox>
+    </div>
+  </div>
+
+  <!-- Table displaying requests -->
+  <table mat-table [dataSource]="filteredRequests" class="mat-elevation-z8">
+    <!-- Table Columns -->
+    <ng-container matColumnDef="user">
+      <th mat-header-cell *matHeaderCellDef> User </th>
+      <td mat-cell *matCellDef="let request"> {{ request.user.name }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hwDetails">
+      <th mat-header-cell *matHeaderCellDef> Hardware </th>
+      <td mat-cell *matCellDef="let request"> {{ request.hwDetails.name }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="comments">
+      <th mat-header-cell *matHeaderCellDef> Comments </th>
+      <td mat-cell *matCellDef="let request"> {{ request.comments }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="requestDate">
+      <th mat-header-cell *matHeaderCellDef> Request Date </th>
+      <td mat-cell *matCellDef="let request"> {{ request.requestDate | date }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expectedReturnDate">
+      <th mat-header-cell *matHeaderCellDef> Return Date </th>
+      <td mat-cell *matCellDef="let request"> {{ request.expectedReturnDate | date }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let request">
+        <span [ngClass]="{
+          'approved-status': request.status === 'APPROVED',
+          'rejected-status': request.status === 'REJECTED',
+          'pending-status': request.status === 'PENDING'
+        }">
+          {{ request.status }}
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let request">
+        <button mat-button color="primary" (click)="approveRequest(request.id)" [disabled]="request.status !== 'PENDING'">Approve</button>
+        <button mat-button color="warn" (click)="rejectRequest(request.id)" [disabled]="request.status !== 'PENDING'">Reject</button>
+        <button mat-button color="accent" (click)="issueRequest(request.id)" [disabled]="request.status !== 'APPROVED'">Issue</button>
+      </td>
+    </ng-container>
+
+    <!-- Row Definitions -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!-- No requests found message -->
+  <div *ngIf="filteredRequests.length === 0" class="no-requests">
+    <p>No user requests available at the moment.</p>
+  </div>
+</div>

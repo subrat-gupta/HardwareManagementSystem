@@ -1,0 +1,30 @@
+.dashboard-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .dashboard-card {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  .complete-icon {
+    color: green;
+    font-size: 24px;
+  }
+  
+  .incomplete-icon {
+    color: red;
+    font-size: 24px;
+  }
+  
+  th.mat-header-cell, td.mat-cell {
+    padding: 8px 16px;
+  }
+  

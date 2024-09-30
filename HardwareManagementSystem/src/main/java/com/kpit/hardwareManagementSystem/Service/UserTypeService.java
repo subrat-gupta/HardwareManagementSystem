@@ -1,8 +1,7 @@
-package com.kpit.hardwareManagementSystem.Service;
+package com.kpit.hardwareManagementSystem.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.kpit.hardwareManagementSystem.model.UserType;
 import com.kpit.hardwareManagementSystem.repository.UserTypeRepository;
@@ -10,7 +9,6 @@ import com.kpit.hardwareManagementSystem.repository.UserTypeRepository;
 import java.util.List;
 
 @Service
-@Transactional
 public class UserTypeService {
     @Autowired
     private UserTypeRepository userTypeRepository;

@@ -10,10 +10,9 @@ import { SharedModule } from '../shared/shared.module';
   declarations: [
     RegisterComponent,
     LoginComponent
-  ],
+  ],exports:[LoginComponent,RegisterComponent],
   imports: [
     CommonModule,SharedModule
-  ],
-  exports:[LoginComponent]
+  ]
 })
 export class AuthModule { }

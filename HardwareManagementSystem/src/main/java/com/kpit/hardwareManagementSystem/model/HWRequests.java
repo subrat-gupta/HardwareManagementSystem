@@ -18,14 +18,16 @@ public class HWRequests {
     private LocalDateTime requestDate;
     private Boolean isComplete;
     private String comments;
+    private LocalDateTime expectedReturnDate;
+    private String status;
 
     @ManyToOne
     @JoinColumn(name = "userId")
     private Users user;
 
     @ManyToOne
-    @JoinColumn(name = "hwListId")
+    @JoinColumn(name = "hwId")  // Ensure this column name matches the foreign key column in the database
     private HWDetails hwDetails;
-    
+
     // Getters and Setters
 }

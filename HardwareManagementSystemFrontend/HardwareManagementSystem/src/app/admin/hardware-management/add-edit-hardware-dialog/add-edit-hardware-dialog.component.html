@@ -1,0 +1,51 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Edit Hardware' : 'Add Hardware' }}</h2>
+<mat-dialog-content [formGroup]="hardwareForm" class="hardware-form">
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" placeholder="Enter hardware name" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <input matInput formControlName="description" placeholder="Enter description" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Part Number</mat-label>
+    <input matInput formControlName="partNumber" placeholder="Enter part number" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Product Serial Number</mat-label>
+    <input matInput formControlName="productSerialNumber" placeholder="Enter product serial number" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>KPIT Serial No</mat-label>
+    <input matInput formControlName="kpitSerialNo" placeholder="Enter KPIT serial no" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Date of Induction</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="dateOfInduction" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Hardware Type</mat-label>
+    <mat-select formControlName="hwTypeId">
+      <mat-option *ngFor="let type of hwTypes" [value]="type.id">{{ type.description }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-checkbox formControlName="isIssued">Is Issued</mat-checkbox>
+  <mat-checkbox formControlName="isUnusable">Is Unusable</mat-checkbox>
+  <mat-checkbox formControlName="inMultiModule">In Multi-Module</mat-checkbox>
+  <mat-checkbox formControlName="released">Released</mat-checkbox>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="onSave()" color="primary">Save</button>
+</mat-dialog-actions>
