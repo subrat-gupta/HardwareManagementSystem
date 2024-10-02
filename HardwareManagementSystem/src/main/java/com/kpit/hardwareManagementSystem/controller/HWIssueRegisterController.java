@@ -1,8 +1,10 @@
 package com.kpit.hardwareManagementSystem.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.kpit.hardwareManagementSystem.model.HWDetails;
 import com.kpit.hardwareManagementSystem.model.HWIssueRegister;
 import com.kpit.hardwareManagementSystem.service.HWIssueRegisterService;
 
@@ -19,11 +21,17 @@ public class HWIssueRegisterController {
         return hwIssueRegisterService.getAllHWIssueRegisters();
     }
 
-    @GetMapping("/{id}")
-    public HWIssueRegister getHWIssueRegisterById(@PathVariable Long id) {
-        return hwIssueRegisterService.getHWIssueRegisterById(id);
-    }
-
+	
+//	 @GetMapping("/{id}") public HWIssueRegister
+//	 getHWIssueRegisterById(@PathVariable Long id) { return
+//	 hwIssueRegisterService.getHWIssueRegisterById(id); }
+	 
+	 @GetMapping("/issued/{empId}") 
+	 public ResponseEntity<List<HWDetails>> getHWIssueRegisterById(@PathVariable Long empId){
+		 List<HWDetails> issuedHardware = hwIssueRegisterService.getHWIssueRegisterById(empId);
+	        return ResponseEntity.ok(issuedHardware);
+	 }
+    
     @PostMapping
     public HWIssueRegister createHWIssueRegister(@RequestBody HWIssueRegister hwIssueRegister) {
         return hwIssueRegisterService.createHWIssueRegister(hwIssueRegister);

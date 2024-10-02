@@ -51,7 +51,8 @@ public class UsersService {
         return usersRepository.save(user);
     }
     public Users getUserById(Long id) {
-        return usersRepository.findById(id).orElse(null);
+    	String empIdString = String.valueOf(id);
+        return usersRepository.findBykpitEmpId(empIdString).orElse(null);
     }
 
     public void deleteUser(Long id) {

@@ -10,10 +10,11 @@
           <div *ngIf="user">
             <div class="user-details">
               <div class="user-info">
-                <h2>User Details</h2>
-                <p>ID: {{user.id}}</p>
+                <h2>User Details</h2>               
+                <p>KPIT ID: {{user.EmpId}}</p>
                 <p>Name: {{user.name}}</p>
                 <p>Email: {{user.email}}</p>
+                <p>User Type: {{user.userType}}</p>
               </div>
               <button mat-button class="issue-button" (click)="issueHardware()">Issue Hardware</button>
             </div>

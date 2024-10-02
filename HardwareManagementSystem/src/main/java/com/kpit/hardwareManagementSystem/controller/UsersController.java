@@ -1,13 +1,16 @@
 package com.kpit.hardwareManagementSystem.controller;
 
 import com.kpit.hardwareManagementSystem.dto.UsersDTO;
+import com.kpit.hardwareManagementSystem.model.UserType;
 import com.kpit.hardwareManagementSystem.model.Users;
+import com.kpit.hardwareManagementSystem.service.UserTypeService;
 import com.kpit.hardwareManagementSystem.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -15,6 +18,8 @@ public class UsersController {
 
     @Autowired
     private UsersService usersService;
+    @Autowired
+    private UserTypeService userTypeService;
 
     @PostMapping("/register")
     public ResponseEntity<Users> registerUser(@RequestBody UsersDTO usersDTO) {
@@ -63,7 +68,7 @@ public class UsersController {
             user.setContactNumber(usersDTO.getContactNumber());
             user.setLocation(usersDTO.getLocation());
             user.setKpitEmpId(usersDTO.getKpitEmpId());
-            user.setUserType(usersDTO.getUserType());
+            //user.setUserType(usersDTO.getUserType());
             user.setIsActive(usersDTO.getIsActive());
             Users updatedUser = usersService.updateUser(user);
             return ResponseEntity.ok(updatedUser);
@@ -81,7 +86,11 @@ public class UsersController {
         user.setLocation(usersDTO.getLocation());
         user.setKpitEmpId(usersDTO.getKpitEmpId());
         user.setIsActive(usersDTO.getIsActive());
-        user.setUserType(usersDTO.getUserType());
+        //user.setUserType(usersDTO.getUserType());
+     // Fetch the UserType based on ID
+        UserType userTypeOpt = userTypeService.getUserTypeById(usersDTO.getUserTypeId());
+        // Set the fetched UserType
+        user.setUserType(userTypeOpt);
         Users savedUser = usersService.addUser(user);
         return ResponseEntity.ok(savedUser);
     }
