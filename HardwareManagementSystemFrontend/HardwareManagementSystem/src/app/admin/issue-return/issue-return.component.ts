@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { HardwareService } from '../../shared/services/hardware.service';
 import { IssueHardwareDialogComponent } from './issue-hardware-hardware-dialog/issue-hardware-hardware-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UsersManagementComponent } from '../users-management/users-management.component';
+import { UserManagementService } from '../../shared/services/user-management.service';
 @Component({
   selector: 'issue-return',
   standalone: true,
@@ -23,29 +25,81 @@ export class IssueReturnComponent {
 
   constructor(
     private HardwareService: HardwareService,
+    private UserManagementService: UserManagementService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
   ) {}
 
+  // searchUser(event: any): void {
+  //   const userId: number = event.target.value;
+  //   if (userId) {
+  //     this.UserManagementService.getUserById(userId).subscribe(
+  //       (data) => {
+  //         // Map the data to your user object structure
+  //         this.user = {
+  //           id: data.id,
+  //           EmpId: data.kpitEmpId,
+  //           name: data.name,
+  //           contactNumber: data.contactNumber,
+  //           email: data.email,
+  //           isActive: data.isActive,
+  //           location: data.location,
+  //           userType: data.userType ? data.userType.description : '', // Map userType if present
+  //         };
+
+  //         // Reset issuedHardware if applicable
+  //         this.issuedHardware.data = [];
+  //       },
+  //       (error) => {
+  //         console.error('Error fetching user details:', error);
+  //         this.user = null;
+  //         this.issuedHardware.data = [];
+  //       }
+  //     );
+  //   } else {
+  //     this.user = null;
+  //     this.issuedHardware.data = [];
+  //   }
+
+  // }
   searchUser(event: any): void {
-    const userId: string = event.target.value;
+    const userId: number = event.target.value;
+
     if (userId) {
-      this.HardwareService.getIssuedHardwareByUserId(userId).subscribe(
-        (data) => {
-          this.issuedHardware.data = data;
-          this.snackBar.open('User details fetched successfully', 'Close', {
-            duration: 3000,
-          });
-          // Optionally fetch user details here if needed
+      // Fetch the user details first
+      this.UserManagementService.getUserById(userId).subscribe(
+        (userData) => {
+          // Map the data to your user object structure
+          this.user = {
+            id: userData.id,
+            EmpId: userData.kpitEmpId,
+            name: userData.name,
+            contactNumber: userData.contactNumber,
+            email: userData.email,
+            isActive: userData.isActive,
+            location: userData.location,
+            userType: userData.userType ? userData.userType.description : '', // Map userType if present
+          };
+
+          // Once user details are fetched, fetch issued hardware for this user
+          this.HardwareService.getIssuedHardwareByEmpId(userId).subscribe(
+            (issuedHardwareData) => {
+              this.issuedHardware.data = issuedHardwareData; // Update the issuedHardware data
+            },
+            (hardwareError) => {
+              console.error('Error fetching issued hardware:', hardwareError);
+              this.issuedHardware.data = []; // Reset if there's an error fetching issued hardware
+            }
+          );
         },
-        (error) => {
-          console.error('Error fetching user details', error);
-          this.snackBar.open('Failed to fetch user details', 'Close', {
-            duration: 3000,
-          });
+        (userError) => {
+          console.error('Error fetching user details:', userError);
+          this.user = null; // Reset user data on error
+          this.issuedHardware.data = []; // Reset issued hardware data on error
         }
       );
     } else {
+      // Reset user and hardware data if userId is not provided
       this.user = null;
       this.issuedHardware.data = [];
     }

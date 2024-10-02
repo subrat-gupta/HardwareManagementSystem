@@ -9,7 +9,7 @@ import { HWDetails, HWType } from '../../user/request/request.component';
 export class HardwareService {
   private hwTypesUrl = 'http://localhost:8080/api/hw-types';
   private hwDetailsUrl = 'http://localhost:8080/api/hw-details';
-  private hwIssueRegisterUrl = 'http://localhost:8080//api/hw-issue-register';
+  private hwIssueRegisterUrl = 'http://localhost:8080/api/hw-issue-register';
 
   constructor(private http: HttpClient) {}
 
@@ -78,7 +78,13 @@ export class HardwareService {
       headers: this.getAuthHeaders(),
     });
   }
-
+// Method to get hardware by HWTypeId
+getHardwareByType(hwTypeId: number): Observable<HWDetails[]> {
+  const url = `${this.hwDetailsUrl}/type/${hwTypeId}`;
+  return this.http.get<HWDetails[]>(url, {
+    headers: this.getAuthHeaders(),
+  });
+}
   // Issue hardware to a user
   issueHardware(userId: string, hardwareId: string): Observable<void> {
     return this.http.post<void>(`${this.hwDetailsUrl}/issue`, {
@@ -94,7 +100,11 @@ export class HardwareService {
 
   // Get issued hardware by user ID
   getIssuedHardwareByUserId(userId: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.hwIssueRegisterUrl}/issued/${userId}`, {
+    return this.http.get<any[]>(`${this.hwDetailsUrl}/issued/${userId}`);
+  }
+
+  getIssuedHardwareByEmpId(empId: number): Observable<any> {
+    return this.http.get<any>(`${this.hwIssueRegisterUrl}/issued/${empId}`, {
       headers: this.getAuthHeaders(),
     });
   }

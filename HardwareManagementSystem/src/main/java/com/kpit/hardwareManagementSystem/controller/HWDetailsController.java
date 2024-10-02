@@ -33,7 +33,16 @@ public class HWDetailsController {
         HWDetails hwDetails = hwDetailsService.getHWDetailsById(id);
         return hwDetails != null ? ResponseEntity.ok(hwDetails) : ResponseEntity.notFound().build();
     }
-
+    
+    @GetMapping("/type/{hwTypeId}")
+    public ResponseEntity<List<HWDetails>> getHWDetailsByTypeId(@PathVariable Long hwTypeId) {
+        List<HWDetails> hwDetailsList = hwDetailsService.getHWDetailsByTypeId(hwTypeId);
+        if (hwDetailsList.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(hwDetailsList);
+    }
+    
     // Create new hardware with type
     @PostMapping
     public ResponseEntity<HWDetails> createHWDetails(@RequestBody HWDetails hwDetails) {

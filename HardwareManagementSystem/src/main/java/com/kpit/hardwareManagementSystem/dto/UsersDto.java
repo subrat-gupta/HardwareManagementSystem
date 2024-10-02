@@ -16,7 +16,7 @@ public class UsersDTO {
     private String contactNumber;
     private String location;
     private Boolean isActive;
-    private UserType userType;
+    private Long userTypeId;
 
     // Getters and Setters
 }

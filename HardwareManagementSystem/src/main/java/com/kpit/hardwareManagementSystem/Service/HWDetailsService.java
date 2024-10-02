@@ -26,6 +26,9 @@ public class HWDetailsService {
         return hwDetailsRepository.findById(id).orElse(null);
     }
 
+    public List<HWDetails> getHWDetailsByTypeId(Long hwTypeId) {
+        return hwDetailsRepository.findByHwTypeIdAndIsIssued(hwTypeId,false);
+    }
     public HWDetails saveHWDetails(HWDetails hwDetails) {
         return hwDetailsRepository.save(hwDetails);
     }

@@ -1,14 +1,33 @@
 <h2 mat-dialog-title>Select Hardware to Issue</h2>
+
 <mat-dialog-content>
   <mat-form-field>
-    <mat-label>Hardware</mat-label>
-    <mat-select [(value)]="selectedHardware">
-      <mat-option *ngFor="let item of availableHardware" [value]="item">
-        {{ item.name }}
+    <mat-label>Hardware Type</mat-label>
+    <mat-select [(value)]="selectedHardwareType" (selectionChange)="onHardwareTypeSelected($event.value)">
+      <mat-option *ngFor="let type of availableHardwareTypes" [value]="type">
+        {{ type.description }}
       </mat-option>
     </mat-select>
   </mat-form-field>
+
+  <mat-form-field *ngIf="availableHardware.length > 0">
+    <mat-label>Product Serial Number</mat-label>
+    <mat-select [formControl]="hardwareControl" [(value)]="selectedHardware" (selectionChange)="onHardwareSelected($event.value)">
+      <mat-option *ngFor="let hardware of filteredHardware | async" [value]="hardware">
+        {{ hardware.productSerialNumber }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Display hardware details (non-editable) when a product is selected -->
+  <div *ngIf="selectedHardware">
+    <p><strong>Part Number:</strong> {{ selectedHardware.partNumber }}</p>
+    <p><strong>KPIT Serial No:</strong> {{ selectedHardware.kpitSerialNo }}</p>
+    <p><strong>Name:</strong> {{ selectedHardware.name }}</p>
+    <p><strong>Description:</strong> {{ selectedHardware.description }}</p>
+  </div>
 </mat-dialog-content>
+
 <mat-dialog-actions>
   <button mat-button (click)="onCancel()">Cancel</button>
   <button mat-button (click)="onIssue()" [disabled]="!selectedHardware">Issue</button>
