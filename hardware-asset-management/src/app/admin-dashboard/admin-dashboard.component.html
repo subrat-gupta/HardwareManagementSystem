@@ -1,0 +1,43 @@
+<div class="admin-dashboard">
+  <!-- Sidebar -->
+  <mat-sidenav-container>
+    <mat-sidenav mode="side" opened>
+      <mat-nav-list>
+        <mat-form-field appearance="outline">
+          <mat-label>Search</mat-label>
+          <input matInput [(ngModel)]="searchQuery" (input)="onSearch()" />
+        </mat-form-field>
+        <a mat-list-item routerLink="welcome" routerLinkActive="active"
+          >Welcome</a
+        >
+        <a mat-list-item routerLink="profile" routerLinkActive="active"
+          >Edit Profile</a
+        >
+        <a mat-list-item routerLink="projects" routerLinkActive="active"
+          >Manage Projects</a
+        >
+        <a mat-list-item routerLink="users" routerLinkActive="active"
+          >Manage Users</a
+        >
+        <a mat-list-item routerLink="hardware" routerLinkActive="active"
+          >Manage Hardware</a
+        >
+        <a mat-list-item routerLink="requests" routerLinkActive="active"
+          >Hardware Issue Requests</a
+        >
+        <a mat-list-item routerLink="requests" routerLinkActive="active"
+          >User Profile Requests</a
+        >
+        <a mat-list-item routerLink="requests" routerLinkActive="active"
+          >View Profile</a
+        >
+        <a mat-list-item (click)="onLogout()">Logout</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <!-- Main Content -->
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

@@ -1,0 +1,32 @@
+<div class="employee-dashboard">
+    <!-- Sidebar -->
+    <mat-sidenav-container>
+      <mat-sidenav mode="side" opened>
+        <mat-nav-list>
+
+          <a mat-list-item routerLink="welcome" routerLinkActive="active"
+            >Welcome</a
+          >
+          <a mat-list-item routerLink="AvailableHardwares" routerLinkActive="active"
+            >Available Hardwares</a
+          >
+          <a mat-list-item routerLink="newRequest" routerLinkActive="active"
+            >Request Hardware</a
+          >
+          <a mat-list-item routerLink="myBucket" routerLinkActive="active"
+            >My Bucket</a
+          >
+          <a mat-list-item routerLink="myRequests" routerLinkActive="active"
+            >My Requests</a
+          >
+          <a mat-list-item (click)="onLogout()">Logout</a>
+        </mat-nav-list>
+      </mat-sidenav>
+  
+      <!-- Main Content -->
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+  

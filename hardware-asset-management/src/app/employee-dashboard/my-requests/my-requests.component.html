@@ -1,0 +1,13 @@
+<h2>My Requests</h2>
+<mat-table [dataSource]="requestsList" class="mat-elevation-z8">
+  <ng-container matColumnDef="hardware">
+    <mat-header-cell *matHeaderCellDef>Hardware</mat-header-cell>
+    <mat-cell *matCellDef="let request">{{ request.hardwareName }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+    <mat-cell *matCellDef="let request">{{ request.status }}</mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

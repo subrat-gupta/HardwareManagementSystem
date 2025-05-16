@@ -1,0 +1,54 @@
+<div class="search-results">
+    <h2>Search Results for "{{ searchQuery }}"</h2>
+  
+    <!-- Users -->
+    <h3>Users</h3>
+    <mat-table [dataSource]="users">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.name }}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.email }}</mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="['name', 'email']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['name', 'email'];"></mat-row>
+    </mat-table>
+  
+    <!-- Projects -->
+    <h3>Projects</h3>
+    <mat-table [dataSource]="projects">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let project">{{ project.name }}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+        <mat-cell *matCellDef="let project">{{ project.description }}</mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="['name', 'description']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['name', 'description'];"></mat-row>
+    </mat-table>
+  
+    <!-- Hardware -->
+    <h3>Hardware</h3>
+    <mat-table [dataSource]="hardware">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let hardware">{{ hardware.name }}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="serialNumber">
+        <mat-header-cell *matHeaderCellDef>Serial Number</mat-header-cell>
+        <mat-cell *matCellDef="let hardware">{{ hardware.serialNumber }}</mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="['name', 'serialNumber']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['name', 'serialNumber'];"></mat-row>
+    </mat-table>
+  </div>

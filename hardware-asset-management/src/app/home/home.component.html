@@ -1,0 +1,85 @@
+<!-- Navigation Bar -->
+<div>
+  <mat-toolbar color="primary">
+    <span>Hardware Asset Management</span>
+    <span class="spacer"></span>
+    <button mat-button *ngIf="!isLoggedIn()" routerLink="/login">Login</button>
+  <button mat-button *ngIf="!isLoggedIn()" routerLink="/signup">Signup</button>
+  <button mat-button *ngIf="isLoggedIn()" (click)="onLogout()">Logout</button>
+  </mat-toolbar>
+</div>
+
+<!-- Welcome Section with Background -->
+<div class="welcome-section" @fadeIn>
+  <mat-card class="welcome-card">
+    <mat-card-header>
+      <mat-card-title>Welcome to Hardware Asset Management</mat-card-title>
+      <mat-card-subtitle
+        >Manage your hardware assets efficiently</mat-card-subtitle
+      >
+    </mat-card-header>
+    <img mat-card-image src="assets/images/images.png" alt="Hardware Image" />
+    <mat-card-content>
+      <p>
+        This application helps you manage hardware assets like ECUs, harnesses,
+        power supply units, and more. Admins can approve requests, and employees
+        can request hardware for their projects.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" routerLink="/login">
+        Get Started
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<!-- About Us -->
+<div class="about-section" @fadeIn>
+  <h2>About Us</h2>
+  <p>
+    We provide hardware asset management solutions for the automotive industry.
+  </p>
+</div>
+
+<!-- Features -->
+<div class="features-section" @fadeIn>
+  <h2>Features</h2>
+  <div class="features-grid">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Hardware Tracking</mat-card-title>
+      </mat-card-header>
+      <mat-card-content
+        >Track all your hardware assets in one place.</mat-card-content
+      >
+    </mat-card>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Request Management</mat-card-title>
+      </mat-card-header>
+      <mat-card-content
+        >Employees can request hardware, and admins can approve or reject
+        requests.</mat-card-content
+      >
+    </mat-card>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Role-Based Access</mat-card-title>
+      </mat-card-header>
+      <mat-card-content
+        >Admins and employees have different levels of access.</mat-card-content
+      >
+    </mat-card>
+  </div>
+</div>
+
+<!-- Contact Us -->
+<div class="contact-section" @fadeIn>
+  <h2>Contact Us</h2>
+  <p>
+    <strong>Email:</strong> support&#64;hardwareassetmanagement.com
+    <br />
+    <strong>Phone:</strong> +1 (123) 456-7890
+  </p>
+</div>

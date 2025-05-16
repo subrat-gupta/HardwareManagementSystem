@@ -1,0 +1,29 @@
+<div class="container">
+  <h2>{{ isEditMode ? "Edit Project" : "Add Project" }}</h2>
+  <form [formGroup]="projectForm" (ngSubmit)="submitForm()">
+    <div class="mb-3">
+      <label>Name</label>
+      <input type="text" formControlName="name" class="form-control" />
+    </div>
+    <div class="mb-3">
+      <label>Description</label>
+      <input type="text" formControlName="description" class="form-control" />
+    </div>
+    <div class="mb-3">
+      <label>Start Date</label>
+      <input type="date" formControlName="startDate" class="form-control" />
+    </div>
+    <div class="mb-3">
+      <label>End Date</label>
+      <input type="date" formControlName="endDate" class="form-control" />
+    </div>
+    <div class="mb-3">
+      <label>Status</label>
+      <select formControlName="status" class="form-control">
+        <option value="ONGOING">Ongoing</option>
+        <option value="COMPLETED">Completed</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+  </form>
+</div>

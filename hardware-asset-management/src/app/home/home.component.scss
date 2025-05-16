@@ -1,0 +1,75 @@
+/* Full page background */
+/* ✅ Corrected path for background image */
+body {
+  background: url("/assets/images/images.png") no-repeat center center fixed;
+  background-size: cover;
+}
+/* About Us Section */
+.about-section {
+  padding: 4rem 2rem;
+  background-color: #f5f5f5;
+  text-align: center;
+}
+
+.about-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.about-section p {
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Features Section */
+.features-section {
+  padding: 4rem 2rem;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.features-section h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.features-grid mat-card {
+  padding: 1.5rem;
+  text-align: left;
+}
+
+.features-grid mat-card-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.features-grid mat-card-content {
+  font-size: 1rem;
+}
+
+/* Contact Us Section */
+.contact-section {
+  padding: 4rem 2rem;
+  background-color: #f5f5f5;
+  text-align: center;
+}
+
+.contact-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-section p {
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}

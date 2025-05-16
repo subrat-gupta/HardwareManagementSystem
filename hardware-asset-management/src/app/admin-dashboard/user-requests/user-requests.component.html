@@ -1,0 +1,35 @@
+<div class="user-requests">
+    <h2>User Requests</h2>
+  
+    <mat-table [dataSource]="requests">
+      <!-- User ID Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+        <mat-cell *matCellDef="let request">{{ request.id }}</mat-cell>
+      </ng-container>
+  
+      <!-- User Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let request">{{ request.name }}</mat-cell>
+      </ng-container>
+  
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+        <mat-cell *matCellDef="let request">{{ request.email }}</mat-cell>
+      </ng-container>
+  
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+        <mat-cell *matCellDef="let request">
+          <button mat-raised-button color="primary" (click)="onApprove(request)">Approve</button>
+          <button mat-raised-button color="warn" (click)="onReject(request)">Reject</button>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>

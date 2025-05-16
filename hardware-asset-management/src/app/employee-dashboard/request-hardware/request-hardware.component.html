@@ -1,0 +1,13 @@
+<h2>Request Hardware</h2>
+<form [formGroup]="requestForm" (ngSubmit)="submitRequest()">
+  <mat-form-field>
+    <mat-label>Hardware ID</mat-label>
+    <input matInput formControlName="hardwareId" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Reason</mat-label>
+    <textarea matInput formControlName="reason" required></textarea>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit">Request</button>
+</form>
+

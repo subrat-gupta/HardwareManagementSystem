@@ -1,0 +1,26 @@
+<div class="container">
+    <h2>Projects</h2>
+    <button routerLink="new" class="btn btn-primary">Add Project</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let project of projects">
+          <td>{{ project.name }}</td>
+          <td>{{ project.description }}</td>
+          <td>{{ project.status }}</td>
+          <td>
+            <!-- <button [routerLink]="['/projects/edit', project.projectId]" class="btn btn-warning">Edit</button> -->
+            <button (click)="deleteProject(project.projectId!)" class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
