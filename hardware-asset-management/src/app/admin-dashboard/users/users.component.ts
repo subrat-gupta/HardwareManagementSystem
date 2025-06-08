@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class UsersComponent implements OnInit {
   users: any[] = [];
-  displayedColumns: string[] = ['id', 'name', 'email', 'role', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'email', 'role', 'project', 'actions'];
 
   constructor(
     private userService: UserService,

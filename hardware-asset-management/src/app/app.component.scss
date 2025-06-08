@@ -1,0 +1,7 @@
+.spacer {
+  flex: 1;
+}
+::ng-deep mat-toolbar {
+  background-color: #212121 !important;
+  color: black; /* Ensures text is readable */
+}

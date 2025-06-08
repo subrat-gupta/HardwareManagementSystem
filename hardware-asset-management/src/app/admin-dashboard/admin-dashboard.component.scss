@@ -5,18 +5,29 @@
 
 mat-sidenav {
   width: 250px;
-  background-color: #3f51b5; /* Primary color */
+  background-color: #c1fd66; /* Primary color */
+  border: none !important; /* Removes border */
+  box-shadow: none !important; /* Removes any shadow */
 }
 
 mat-sidenav-content {
-  flex: 1;
+  flex:2; /* Allows it to expand */
+  display: flex;
   padding: 20px;
+  flex-direction: column;
 }
 
 mat-nav-list a {
-  color: white;
+  color: white !important; /* Ensures text stays white */
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+  transition: background-color 0.3s ease-in-out;
 }
 
 mat-nav-list a.active {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.3);
+}
+mat-nav-list a:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Lighter hover effect */
 }

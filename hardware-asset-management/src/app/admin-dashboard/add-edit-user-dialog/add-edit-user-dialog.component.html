@@ -1,6 +1,15 @@
 <h2 mat-dialog-title>{{ data.mode === 'add' ? 'Add User' : 'Edit User' }}</h2>
 <mat-dialog-content>
   <form [formGroup]="userForm">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Employee ID</mat-label>
+      <input matInput formControlName="employeeId" required />
+      <mat-error *ngIf="userForm.get('employeeId')?.hasError('required')">
+        Employee ID is required
+      </mat-error>
+    </mat-form-field>
+
     <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
       <input matInput formControlName="name" required>
@@ -18,7 +27,18 @@
         <mat-option value="EMPLOYEE">Employee</mat-option>
       </mat-select>
     </mat-form-field>
-
+<!-- Project Dropdown -->
+        <mat-form-field appearance="outline">
+          <mat-label>Project</mat-label>
+          <mat-select formControlName="projectId" required>
+            <mat-option *ngFor="let project of projects" [value]="project.projectId">
+              {{ project.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="userForm.get('projectId')?.hasError('required')">
+            Project selection is required
+          </mat-error>
+        </mat-form-field>
     <mat-form-field appearance="outline" *ngIf="data.mode === 'add'">
       <mat-label>Password</mat-label>
       <input matInput type="password" formControlName="password" required>

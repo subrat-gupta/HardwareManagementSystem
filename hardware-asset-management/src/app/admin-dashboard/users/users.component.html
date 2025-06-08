@@ -26,6 +26,12 @@
         <mat-header-cell *matHeaderCellDef>Role</mat-header-cell>
         <mat-cell *matCellDef="let user">{{ user.role }}</mat-cell>
       </ng-container>
+
+      <!-- Project Column -->
+      <ng-container matColumnDef="project">
+        <mat-header-cell *matHeaderCellDef>Project</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.project.name }}</mat-cell>
+      </ng-container>
   
       <!-- Actions Column -->
       <ng-container matColumnDef="actions">

@@ -1,0 +1,19 @@
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Creates 3 equal columns */
+  grid-template-rows: auto auto auto; /* Ensures 3 rows */
+  gap: 20px; /* Adds space between cards */
+  padding: 20px;
+}
+
+.feature-card {
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb); /* Light blue gradient */
+  padding: 15px;
+  text-align: center;
+}
+
+.feature-card:hover {
+  transform: scale(1.05);
+}
