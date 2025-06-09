@@ -75,4 +75,12 @@ export class UserService {
   rejectUser(id: number): Observable<any> {
     return this.http.put(`${this.apiUrl}/user-requests/${id}/reject`, {});
   }
+  getUserByEmail(email: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.get(`${this.apiUrl}/users/${email}`, { headers });
+  }
 }

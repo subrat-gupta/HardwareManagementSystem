@@ -36,6 +36,10 @@ export class AddEditUserDialogComponent implements OnInit {
   ngOnInit(): void {
     if (this.data.mode === 'edit') {
       this.userForm.patchValue(this.data.user);
+      this.userForm.patchValue({
+          ...this.data.user,
+          projectId: this.data.user.project?.projectId
+        });
       this.userForm.get('password')?.clearValidators(); // Password not required for edit
     }
     this.loadProjects();
@@ -72,7 +76,18 @@ export class AddEditUserDialogComponent implements OnInit {
       }
     );
     } else {
-      this.userService.updateUser(this.data.user.userId, user).subscribe(
+      const formData = this.userForm.getRawValue(); // Ensures all values are included
+
+    // Prepare updated user data
+    const updatedUser = {
+      employeeId: formData.employeeId,
+      name: formData.name,
+      email: formData.email,
+      role: formData.role,
+      password: formData.password,
+      project: this.projects.find(p => p.projectId === formData.projectId) // Assign full project object
+    };
+      this.userService.updateUser(this.data.user.userId, updatedUser).subscribe(
         (response) => {
           this.snackBar.open('User updated successfully!', 'Close', { duration: 3000 });
           this.dialogRef.close(true);

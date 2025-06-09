@@ -1,21 +1,36 @@
 <div class="profile">
-    <h2>Edit Profile</h2>
-    <form [formGroup]="profileForm" (ngSubmit)="onSave()">
-      <mat-form-field appearance="outline">
-        <mat-label>Name</mat-label>
-        <input matInput formControlName="name" required>
-      </mat-form-field>
-  
-      <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" required>
-      </mat-form-field>
-  
-      <mat-form-field appearance="outline">
-        <mat-label>New Password</mat-label>
-        <input matInput type="password" formControlName="password">
-      </mat-form-field>
-  
-      <button mat-raised-button color="primary" type="submit">Save</button>
-    </form>
-  </div>
+  <h2>Profile</h2>
+  <form [formGroup]="profileForm" (ngSubmit)="onSave()">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Employee ID</mat-label>
+      <input matInput formControlName="employeeId" [disabled]="!isEditing">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" [disabled]="!isEditing">
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline">
+  <mat-label>Project</mat-label>
+  <mat-select formControlName="projectName" [disabled]="!isEditing">
+    <mat-option *ngFor="let project of projects" [value]="project.name">
+      {{ project.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+    <button mat-raised-button color="primary" type="button" (click)="toggleEdit()">
+      {{ isEditing ? 'Cancel' : 'Edit Profile' }}
+    </button>
+    
+    <button mat-raised-button color="accent" type="submit" [disabled]="!isEditing">Save</button>
+  </form>
+</div>

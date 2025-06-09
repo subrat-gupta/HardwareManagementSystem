@@ -70,6 +70,7 @@ export class AuthService {
     const token = this.getToken();
     if (token) {
       const payload = JSON.parse(atob(token.split('.')[1]));
+      console.log("Decoded Payload:", payload); 
       return payload;
     }
     return null;
@@ -114,6 +115,16 @@ export class AuthService {
     password: string
   ): Observable<any> {
     const body = { name, email, password };
-    return this.http.put('/api/update-profile', body);
+    return this.http.put(`/api/users/${this.getEmpId()}`, body);
   }
+
+  getUserByEmail(email: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.get(`/api/users/${email}`, { headers });
+  }
+
 }
