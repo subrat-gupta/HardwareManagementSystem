@@ -19,6 +19,7 @@ import { RequestHardwareComponent } from './employee-dashboard/request-hardware/
 import { MyRequestsComponent } from './employee-dashboard/my-requests/my-requests.component';
 import { MyBucketComponent } from './employee-dashboard/my-bucket/my-bucket.component';
 import { AddEditProjectDialogComponent } from './admin-dashboard/add-edit-project-dialog/add-edit-project-dialog.component';
+import { HardwareRequestsComponent } from './admin-dashboard/hardware-requests/hardware-requests.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -37,7 +38,8 @@ const routes: Routes = [
       { path: 'projects/new', component: AddEditProjectDialogComponent },
       { path: 'users', component: UsersComponent },
       { path: 'hardware', component: HardwareComponent },
-      { path: 'requests', component: UserRequestsComponent },
+      { path: 'requests', component: HardwareRequestsComponent },
+      { path: 'userRequests', component: UserRequestsComponent },
       { path: 'search-results', component: SearchResultsComponent },
     ],
   },

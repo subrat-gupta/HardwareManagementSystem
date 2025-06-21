@@ -100,4 +100,13 @@ export class HardwareService {
     });
     return this.http.get<any[]>(`${this.apiUrl}/requests/my-requests`, { headers });
   }
+
+  getPendingRequests(): Observable<any[]> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    });
+    return this.http.get<any[]>(`${this.apiUrl}/requests/pending`, { headers });
+  }
 }

@@ -23,11 +23,18 @@ export class AddEditHardwareDialogComponent implements OnInit {
     private hardwareService: HardwareService,
     private snackBar: MatSnackBar
   ) {
-    this.hardwareForm = this.fb.group({
-      name: ['', Validators.required],
-      serialNumber: ['', Validators.required],
-      status: ['', Validators.required],
-    });
+this.hardwareForm = this.fb.group({
+  name: ['', Validators.required],
+  type: ['', Validators.required],
+  serialNumber: ['', Validators.required],
+  kpitSerialNumber: [''],
+  partNumber: [''],
+  multiModule: [false],
+  unusable: [false],
+  purchaseDate: [''],
+  status: ['', Validators.required]
+});
+
   }
 
   ngOnInit(): void {
@@ -58,7 +65,7 @@ export class AddEditHardwareDialogComponent implements OnInit {
       );
     } else {
       this.hardwareService
-        .updateHardware(this.data.hardware.id, hardware)
+        .updateHardware(this.data.hardware.hardwareId, hardware)
         .subscribe(
           (response) => {
             this.snackBar.open('Hardware updated successfully!', 'Close', {

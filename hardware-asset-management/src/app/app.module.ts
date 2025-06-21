@@ -34,12 +34,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { EmployeeDashboardComponent } from './employee-dashboard/employee-dashboard.component';
 import { MyRequestsComponent } from './employee-dashboard/my-requests/my-requests.component';
 import { RequestHardwareComponent } from './employee-dashboard/request-hardware/request-hardware.component';
 import { HardwareListComponent } from './employee-dashboard/hardware-list/hardware-list.component';
 import { EmployeeWelcomeComponent } from './employee-dashboard/employee-welcome/employee-welcome.component';
 import { MyBucketComponent } from './employee-dashboard/my-bucket/my-bucket.component';
+import { HardwareRequestsComponent } from './admin-dashboard/hardware-requests/hardware-requests.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,7 @@ import { MyBucketComponent } from './employee-dashboard/my-bucket/my-bucket.comp
     HardwareListComponent,
     EmployeeWelcomeComponent,
     MyBucketComponent,
+    HardwareRequestsComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,6 +91,7 @@ import { MyBucketComponent } from './employee-dashboard/my-bucket/my-bucket.comp
     MatTableModule,
     MatSidenavModule,
     MatListModule,
+    MatSlideToggleModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, // Register the interceptor

@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <h2>{{ isEditMode ? "Edit Project" : "Add Project" }}</h2>
   <form [formGroup]="projectForm" (ngSubmit)="submitForm()">
     <div class="mb-3">
@@ -25,5 +25,42 @@
       </select>
     </div>
     <button type="submit" class="btn btn-success">Save</button>
+  </form>
+</div> -->
+<div class="container mat-elevation-z2" style="padding: 24px;">
+  <h2>{{ isEditMode ? 'Edit Project' : 'Add Project' }}</h2>
+
+  <form [formGroup]="projectForm" (ngSubmit)="submitForm()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Start Date</mat-label>
+      <input matInput type="date" formControlName="startDate" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>End Date</mat-label>
+      <input matInput type="date" formControlName="endDate" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="ONGOING">Ongoing</mat-option>
+        <mat-option value="COMPLETED">Completed</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">
+      Save
+    </button>
   </form>
 </div>

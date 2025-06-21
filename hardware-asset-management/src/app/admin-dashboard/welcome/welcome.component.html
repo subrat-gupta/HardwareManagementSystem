@@ -1,11 +1,11 @@
 <div class="welcome">
   <h1>Welcome, {{ userName }} ({{ empId }})</h1>
-  <p>You have full access to manage projects, users, and hardware.</p>
+  <p>You have admin rights to manage projects, users, and hardware.</p>
 </div>
 <div class="features-grid">
   <mat-card class="feature-card" [routerLink]="['/admin-dashboard/profile']">
     <mat-card-header>
-      <mat-card-title>Edit Profile</mat-card-title>
+      <mat-card-title>My Profile</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <p>Update your personal information.</p>
@@ -35,7 +35,7 @@
       <mat-card-title>Manage Hardware</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <p>Monitor and allocate hardware assets.</p>
+      <p>Monitor hardware assets Inventory.</p>
     </mat-card-content>
   </mat-card>
 
@@ -44,25 +44,16 @@
       <mat-card-title>Hardware Requests</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <p>View and resolve hardware-related requests.</p>
+      <p>View and allocate hardware assets.</p>
     </mat-card-content>
   </mat-card>
 
-  <mat-card class="feature-card" [routerLink]="['/admin-dashboard/requests']">
+  <mat-card class="feature-card" [routerLink]="['/admin-dashboard/UserRequests']">
     <mat-card-header>
       <mat-card-title>User Profile Requests</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <p>Manage user profile change requests.</p>
-    </mat-card-content>
-  </mat-card>
-
-  <mat-card class="feature-card" [routerLink]="['/admin-dashboard/requests']">
-    <mat-card-header>
-      <mat-card-title>View Profile</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <p>Access your personal information.</p>
     </mat-card-content>
   </mat-card>
 </div>
