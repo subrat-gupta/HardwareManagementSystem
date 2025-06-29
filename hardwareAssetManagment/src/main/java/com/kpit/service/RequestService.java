@@ -55,4 +55,11 @@ public class RequestService {
  public List<Request> getMyRequests(Users user) {
      return requestRepository.findByUser(user);
  }
+ public void rejectRequest(Long requestId) {
+	    Request request = requestRepository.findById(requestId)
+	        .orElseThrow(() -> new RuntimeException("Request not found with id: " + requestId));
+
+	    request.setStatus(RequestStatus.REJECTED);
+	    requestRepository.save(request);
+	}
 }

@@ -12,4 +12,5 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 	List<Project> findByDescriptionContainingIgnoreCase(String description);
 	List<Project> findByStartDateBetween(LocalDateTime startDate, LocalDateTime endDate);
 	List<Project> findByStatus(String status);
+	List<Project> findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String name, String description);
 }

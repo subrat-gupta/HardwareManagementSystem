@@ -38,8 +38,9 @@ public class SecurityConfig {
                
                 .requestMatchers("/api/hardware/**").authenticated()// Only admin can access
                 .requestMatchers("/api/requests/**").authenticated()
-                .requestMatchers("/api/issues/**").authenticated()// Only employee can access
+                .requestMatchers("api/issues/**").permitAll()// Only employee can access
                 .requestMatchers("/api/projects/**").permitAll()
+                .requestMatchers("api/search").permitAll()
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

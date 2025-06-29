@@ -13,7 +13,7 @@ export class MyBucketComponent implements OnInit {
   constructor(private hardwareService: HardwareService) {}
 
   ngOnInit() {
-    this.hardwareService.getMyIssuedHardware().subscribe(data => {
+    this.hardwareService.getMyIssuedHardware(Number(localStorage.getItem('userID'))).subscribe(data => {
       this.issuedHardwareList = data;
     });
   }

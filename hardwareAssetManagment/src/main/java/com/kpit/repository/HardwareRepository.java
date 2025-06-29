@@ -11,4 +11,5 @@ import com.kpit.model.HardwareStatus;
 @Repository
 public interface HardwareRepository extends JpaRepository<Hardware, Long> {
 	List<Hardware> findByStatus(HardwareStatus status);
+	List<Hardware> findByNameContainingIgnoreCaseOrKpitSerialNumberContainingIgnoreCase(String name, String serial);
 }

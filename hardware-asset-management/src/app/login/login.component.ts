@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
       (response: any) => {
         this.authService.setToken(response.jwt); // Store the JWT token
         localStorage.setItem('userRole', response.role);
+        localStorage.setItem('userId', response.userId);
         this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
         if (response.role === 'ADMIN') {
           this.router.navigate(['/admin-dashboard']);

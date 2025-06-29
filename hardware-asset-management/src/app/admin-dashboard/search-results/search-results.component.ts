@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SearchService } from '../../services/search.service';
+import { UserDetailsDialogComponent } from '../user-details-dialog/user-details-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { HardwareService } from 'src/app/services/hardware.service';
 
 @Component({
   selector: 'app-search-results',
@@ -15,7 +18,9 @@ export class SearchResultsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private dialog: MatDialog,
+    private hardwareService: HardwareService
   ) {}
 
   ngOnInit(): void {
@@ -33,4 +38,20 @@ export class SearchResultsComponent implements OnInit {
       );
     });
   }
+  openUserDialog(user: any): void {
+  this.hardwareService
+    .getMyIssuedHardware(user.userId)
+    .subscribe((hardware) => {
+      console.log('Issued hardware:', hardware); // ✅ Logs the response
+
+      this.dialog.open(UserDetailsDialogComponent, {
+        width: '1000px',
+        data: {
+          user: user,
+          issuedHardware: hardware,
+        },
+      });
+    });
+}
+
 }

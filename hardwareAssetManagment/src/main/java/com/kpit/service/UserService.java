@@ -7,9 +7,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kpit.model.Project;
 import com.kpit.model.RoleType;
 import com.kpit.model.UserRequest;
 import com.kpit.model.Users;
+import com.kpit.repository.ProjectRepository;
 import com.kpit.repository.UserRepository;
 import com.kpit.repository.UserRequestRepository;
 
@@ -19,7 +21,8 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private UserRequestRepository userRequestRepository;
-    
+    @Autowired
+    private ProjectRepository projectRepository;
     public Users createUser(Users user) {
         user.setCreatedAt(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());
@@ -50,6 +53,10 @@ public class UserService {
             updatedUser.setEmail(user.getEmail());
             updatedUser.setRole(user.getRole());
             updatedUser.setUpdatedAt(LocalDateTime.now());
+            Project newProject = projectRepository.findById(user.getProject().getProjectId()).orElse(null);
+            if (newProject != null) {
+                updatedUser.setProject(newProject);
+            }
             return userRepository.save(updatedUser);
         }
         return null;

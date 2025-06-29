@@ -60,6 +60,7 @@ export class AuthService {
   }
   logout(): void {
     this.removeToken(); // Remove the JWT token
+    localStorage.clear();
     this.router.navigate(['/login']); // Redirect to login page
   }
   isLoggedIn(): boolean {
@@ -108,6 +109,11 @@ export class AuthService {
   getEmpId(): string {
     const user = this.getUser();
     return user ? user.empId : '';
+  }
+
+  getId(): string {
+    const user = this.getUser();
+    return user ? user.id : '';
   }
   updateProfile(
     name: string,

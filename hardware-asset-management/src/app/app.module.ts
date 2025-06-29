@@ -42,6 +42,7 @@ import { HardwareListComponent } from './employee-dashboard/hardware-list/hardwa
 import { EmployeeWelcomeComponent } from './employee-dashboard/employee-welcome/employee-welcome.component';
 import { MyBucketComponent } from './employee-dashboard/my-bucket/my-bucket.component';
 import { HardwareRequestsComponent } from './admin-dashboard/hardware-requests/hardware-requests.component';
+import { UserDetailsDialogComponent } from './admin-dashboard/user-details-dialog/user-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { HardwareRequestsComponent } from './admin-dashboard/hardware-requests/h
     EmployeeWelcomeComponent,
     MyBucketComponent,
     HardwareRequestsComponent,
+    UserDetailsDialogComponent,
   ],
   imports: [
     BrowserModule,

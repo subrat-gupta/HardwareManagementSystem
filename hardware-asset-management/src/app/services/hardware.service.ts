@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
 export class HardwareService {
   private apiUrl = 'http://localhost:8080/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private authService: AuthService) {}
 
   getHardware(): Observable<any> {
     const token = localStorage.getItem('token');
@@ -68,13 +69,13 @@ export class HardwareService {
   }
 
   // Get hardware issued to employee
-  getMyIssuedHardware(): Observable<any[]> {
+  getMyIssuedHardware(userID:number): Observable<any[]> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     });
-    return this.http.get<any[]>(`${this.apiUrl}/issues/issued`, { headers });
+    return this.http.get<any[]>(`${this.apiUrl}/issues/issued/${userID}`, { headers });
   }
 
   // Return issued hardware
@@ -108,5 +109,30 @@ export class HardwareService {
       'Content-Type': 'application/json',
     });
     return this.http.get<any[]>(`${this.apiUrl}/requests/pending`, { headers });
+  }
+
+   approveRequest(requestId: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    const issuedByUserId = Number(localStorage.getItem('userId'));
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    });
+    const url = `${this.apiUrl}/issues/issue/${requestId}/${issuedByUserId}`;
+  console.log('Issuing hardware request to:', url);
+
+  return this.http.put(url, {}, { headers, responseType: 'text' as const});
+  }
+
+  rejectRequest(requestId: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    });
+    const url = `${this.apiUrl}/requests/reject/${requestId}`;
+  console.log('Reject hardware request to:', url);
+
+  return this.http.put(url, {}, { headers , responseType: 'text' as const});
   }
 }
