@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.kpit.model.Hardware;
-import com.kpit.model.HardwareRequest;
 import com.kpit.model.Request;
 import com.kpit.model.RequestStatus;
 import com.kpit.model.Users;

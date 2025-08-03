@@ -39,19 +39,10 @@ export class SearchResultsComponent implements OnInit {
     });
   }
   openUserDialog(user: any): void {
-  this.hardwareService
-    .getMyIssuedHardware(user.userId)
-    .subscribe((hardware) => {
-      console.log('Issued hardware:', hardware); // ✅ Logs the response
-
-      this.dialog.open(UserDetailsDialogComponent, {
-        width: '1000px',
-        data: {
-          user: user,
-          issuedHardware: hardware,
-        },
-      });
-    });
+  this.dialog.open(UserDetailsDialogComponent, {
+    width: '1000px',
+    data: { user },
+  });
 }
 
 }

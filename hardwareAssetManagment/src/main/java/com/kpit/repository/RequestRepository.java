@@ -13,4 +13,6 @@ import com.kpit.model.Users;
 public interface RequestRepository extends JpaRepository<Request, Long> {
 	List<Request> findByUser(Users user);
     List<Request> findByStatus(RequestStatus status);
+    List<Request> findByUser_UserIdAndHardware_HardwareId(Long userId, Long hardwareId);
+
 }

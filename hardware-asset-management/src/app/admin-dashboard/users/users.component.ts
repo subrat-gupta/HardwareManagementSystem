@@ -68,7 +68,7 @@ export class UsersComponent implements OnInit {
           this.loadUsers();
         },
         (error) => {
-          this.snackBar.open('Error deleting user', 'Close', { duration: 3000 });
+          this.snackBar.open('User cannot be deleted once mapped in the system!! Please contact Admin ', 'Close', { duration: 4000 });
         }
       );
     }

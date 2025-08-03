@@ -13,7 +13,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, password: string): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json'});
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http
       .post<any>(`${this.apiUrl}/auth/login`, { email, password })
       .pipe(
@@ -39,28 +39,28 @@ export class AuthService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(
       `${this.apiUrl}/auth/signup`,
-      { name, email, password, employeeId, projectId},
+      { name, email, password, employeeId, projectId },
       { headers }
     );
   }
 
-  // Store the JWT token in localStorage
+  // Store the JWT token in sessionStorage
   setToken(token: string): void {
-    localStorage.setItem('token', token);
+    sessionStorage.setItem('token', token);
   }
 
-  // Retrieve the JWT token from localStorage
+  // Retrieve the JWT token from sessionStorage
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return sessionStorage.getItem('token');
   }
 
-  // Remove the JWT token from localStorage (logout)
+  // Remove the JWT token from sessionStorage (logout)
   removeToken(): void {
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
   }
   logout(): void {
     this.removeToken(); // Remove the JWT token
-    localStorage.clear();
+    sessionStorage.clear();
     this.router.navigate(['/login']); // Redirect to login page
   }
   isLoggedIn(): boolean {
@@ -71,20 +71,20 @@ export class AuthService {
     const token = this.getToken();
     if (token) {
       const payload = JSON.parse(atob(token.split('.')[1]));
-      console.log("Decoded Payload:", payload); 
+      console.log('Decoded Payload:', payload);
       return payload;
     }
     return null;
   }
 
-  // Store user details in localStorage
+  // Store user details in sessionStorage
   setUser(user: any): void {
-    localStorage.setItem('user', JSON.stringify(user));
+    sessionStorage.setItem('user', JSON.stringify(user));
   }
 
-  // Remove user details from localStorage
+  // Remove user details from sessionStorage
   removeUser(): void {
-    localStorage.removeItem('user');
+    sessionStorage.removeItem('user');
   }
 
   // Check if the user is an admin
@@ -125,12 +125,11 @@ export class AuthService {
   }
 
   getUserByEmail(email: string): Observable<any> {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
     });
     return this.http.get(`/api/users/${email}`, { headers });
   }
-
 }

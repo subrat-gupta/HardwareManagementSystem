@@ -9,10 +9,10 @@ import { AuthService } from './auth.service';
 export class HardwareService {
   private apiUrl = 'http://localhost:8080/api';
 
-  constructor(private http: HttpClient,private authService: AuthService) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   getHardware(): Observable<any> {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ export class HardwareService {
   }
 
   addHardware(hardware: any): Observable<any> {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export class HardwareService {
   }
 
   updateHardware(id: number, hardware: any): Observable<any> {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ export class HardwareService {
   }
 
   deleteHardware(id: number): Observable<any> {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -50,60 +50,67 @@ export class HardwareService {
   }
   // Get available hardware
   getAvailableHardware(): Observable<any[]> {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     });
-    return this.http.get<any[]>(`${this.apiUrl}/hardware/available`, { headers });
+    return this.http.get<any[]>(`${this.apiUrl}/hardware/available`, {
+      headers,
+    });
   }
 
   // Request to issue hardware
   requestHardware(hardwareId: any): Observable<any> {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     });
-    return this.http.post(`${this.apiUrl}/requests/${hardwareId.hardwareId}`, { headers }); // No user ID needed
+    return this.http.post(`${this.apiUrl}/requests/${hardwareId.hardwareId}`, {
+      headers,
+    }); // No user ID needed
   }
 
   // Get hardware issued to employee
-  getMyIssuedHardware(userID:number): Observable<any[]> {
-    const token = localStorage.getItem('token');
+  getMyIssuedHardware(userID: number): Observable<any[]> {
+    const token = sessionStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     });
-    return this.http.get<any[]>(`${this.apiUrl}/issues/issued/${userID}`, { headers });
+    return this.http.get<any[]>(`${this.apiUrl}/issues/issued/${userID}`, {
+      headers,
+    });
   }
 
   // Return issued hardware
-  returnHardware(hardwareId: number): Observable<any> {
-    const token = localStorage.getItem('token');
+  returnHardware(userId: number, hardwareId: number): Observable<any> {
+    const token = sessionStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     });
     return this.http.put(
-      `${this.apiUrl}/return/${hardwareId}`,
-      {},
+      `${this.apiUrl}/issues/issued/${userId}/${hardwareId}`,
       { headers }
     );
   }
 
   // Get all requests made by the employee
   getMyRequests(): Observable<any[]> {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     });
-    return this.http.get<any[]>(`${this.apiUrl}/requests/my-requests`, { headers });
+    return this.http.get<any[]>(`${this.apiUrl}/requests/my-requests`, {
+      headers,
+    });
   }
 
   getPendingRequests(): Observable<any[]> {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -111,28 +118,28 @@ export class HardwareService {
     return this.http.get<any[]>(`${this.apiUrl}/requests/pending`, { headers });
   }
 
-   approveRequest(requestId: number): Observable<any> {
-    const token = localStorage.getItem('token');
-    const issuedByUserId = Number(localStorage.getItem('userId'));
+  approveRequest(requestId: number): Observable<any> {
+    const token = sessionStorage.getItem('token');
+    const issuedByUserId = Number(sessionStorage.getItem('userId'));
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     });
     const url = `${this.apiUrl}/issues/issue/${requestId}/${issuedByUserId}`;
-  console.log('Issuing hardware request to:', url);
+    console.log('Issuing hardware request to:', url);
 
-  return this.http.put(url, {}, { headers, responseType: 'text' as const});
+    return this.http.put(url, {}, { headers, responseType: 'text' as const });
   }
 
   rejectRequest(requestId: number): Observable<any> {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     });
     const url = `${this.apiUrl}/requests/reject/${requestId}`;
-  console.log('Reject hardware request to:', url);
+    console.log('Reject hardware request to:', url);
 
-  return this.http.put(url, {}, { headers , responseType: 'text' as const});
+    return this.http.put(url, {}, { headers, responseType: 'text' as const });
   }
 }

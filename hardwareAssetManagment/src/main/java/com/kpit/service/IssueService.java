@@ -62,6 +62,15 @@ public class IssueService {
 	    });
 		
 	}
+    
+    private void changeHarwareStatusToAvailable(Long hardwareId) {
+    	Optional<Hardware> optional = hardwareRepository.findById(hardwareId);
+	    optional.ifPresent(hardware -> {
+	    	hardware.setStatus(HardwareStatus.AVAILABLE);
+	    	hardwareRepository.save(hardware);
+	    });
+		
+	}
 
 	private void approveRequest(Long requestId) {
 	    Optional<Request> optional = requestRepository.findById(requestId);
@@ -80,7 +89,7 @@ public class IssueService {
         List<Hardware> issuedHardwareList = new ArrayList<>();
 
         // Step 1: Get all issued entries (status = ISSUED)
-        List<Issue> issuedList = issueRepository.findAll();
+        List<Issue> issuedList = issueRepository.findByStatus(IssueStatus.ISSUED);
 
         for (Issue issue : issuedList) {
             Long requestId = issue.getRequest().getRequestId();  // Assuming Issue has getRequest()
@@ -104,4 +113,26 @@ public class IssueService {
     }
 
 
+    public boolean returnIssuedHardware(Long userId,Long hwId) {
+    	List<Request> hwRequests = requestRepository.findByUser_UserIdAndHardware_HardwareId(userId, hwId);
+    	if (hwRequests.isEmpty()) {
+            throw new RuntimeException("No hardware request found for userId: " + userId + " and hardwareId: " + hwId);
+        }
+
+    	for (Request hwRequest : hwRequests) {
+            Optional<Issue> issueOpt = issueRepository.findByRequest_RequestIdAndStatus(hwRequest.getRequestId(), IssueStatus.ISSUED);
+
+            if (issueOpt.isPresent()) {
+                Issue issue = issueOpt.get();
+
+                // Step 3: Mark the issue as returned
+                issue.setStatus(IssueStatus.RETURNED);
+                issue.setActualReturnDate(LocalDate.now());
+                issueRepository.save(issue);
+                changeHarwareStatusToAvailable(hwId);
+                return true; // Successfully returned
+            }
+    	}
+    	throw new RuntimeException("No issued hardware found for return with userId: " + userId + " and hardwareId: " + hwId);
+    }
 }

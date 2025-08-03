@@ -21,7 +21,7 @@ export class ProjectService {
   constructor(private http: HttpClient) {}
 
   getProjects(): Observable<any> {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export class ProjectService {
   }
 
   addProject(project: any): Observable<any> {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ export class ProjectService {
   }
 
   updateProject(id: number, project: any): Observable<any> {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ export class ProjectService {
   }
 
   deleteProject(id: number): Observable<any> {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',

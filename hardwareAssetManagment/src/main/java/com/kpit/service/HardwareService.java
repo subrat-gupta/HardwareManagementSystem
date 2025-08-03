@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kpit.model.Hardware;
-import com.kpit.model.HardwareRequest;
 import com.kpit.model.HardwareStatus;
-import com.kpit.model.Users;
 import com.kpit.repository.HardwareRepository;
 
 @Service

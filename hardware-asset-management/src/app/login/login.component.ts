@@ -30,13 +30,13 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-  
+
     const { email, password } = this.loginForm.value;
     this.authService.login(email, password).subscribe(
       (response: any) => {
         this.authService.setToken(response.jwt); // Store the JWT token
-        localStorage.setItem('userRole', response.role);
-        localStorage.setItem('userId', response.userId);
+        sessionStorage.setItem('userRole', response.role);
+        sessionStorage.setItem('userId', response.userId);
         this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
         if (response.role === 'ADMIN') {
           this.router.navigate(['/admin-dashboard']);
@@ -45,7 +45,9 @@ export class LoginComponent implements OnInit {
         }
       },
       (error) => {
-        this.snackBar.open('Invalid email or password', 'Close', { duration: 3000 });
+        this.snackBar.open('Invalid email or password', 'Close', {
+          duration: 3000,
+        });
       }
     );
   }

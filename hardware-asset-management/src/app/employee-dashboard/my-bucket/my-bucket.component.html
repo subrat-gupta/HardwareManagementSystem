@@ -8,13 +8,6 @@
     <mat-header-cell *matHeaderCellDef>Serial Number</mat-header-cell>
     <mat-cell *matCellDef="let hardware">{{ hardware.serialNumber }}</mat-cell>
   </ng-container>
-  <ng-container matColumnDef="return">
-    <mat-header-cell *matHeaderCellDef>Return</mat-header-cell>
-    <mat-cell *matCellDef="let hardware">
-      <button mat-button color="warn" (click)="returnHardware(hardware.id)">Return</button>
-    </mat-cell>
-  </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 </mat-table>
-

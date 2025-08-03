@@ -4,7 +4,7 @@ import { HardwareService } from 'src/app/services/hardware.service';
 @Component({
   selector: 'app-my-bucket',
   templateUrl: './my-bucket.component.html',
-  styleUrls: ['./my-bucket.component.scss']
+  styleUrls: ['./my-bucket.component.scss'],
 })
 export class MyBucketComponent implements OnInit {
   issuedHardwareList: any[] = [];
@@ -13,15 +13,17 @@ export class MyBucketComponent implements OnInit {
   constructor(private hardwareService: HardwareService) {}
 
   ngOnInit() {
-    this.hardwareService.getMyIssuedHardware(Number(localStorage.getItem('userID'))).subscribe(data => {
-      this.issuedHardwareList = data;
-    });
+    this.hardwareService
+      .getMyIssuedHardware(Number(sessionStorage.getItem('userID')))
+      .subscribe((data) => {
+        this.issuedHardwareList = data;
+      });
   }
 
-  returnHardware(hardwareId: number) {
-    this.hardwareService.returnHardware(hardwareId).subscribe(() => {
-      alert('Hardware returned successfully!');
-      this.ngOnInit();
-    });
-  }
+  // returnHardware(hardwareId: number) {
+  //   this.hardwareService.returnHardware(hardwareId).subscribe(() => {
+  //     alert('Hardware returned successfully!');
+  //     this.ngOnInit();
+  //   });
+  // }
 }
